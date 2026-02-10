@@ -1,0 +1,90 @@
+[
+    {
+        "id": 1,
+        "title": "Festival de Poesía en el Parque",
+        "date": "2026-02-15",
+        "time": "14:00",
+        "locality": "Chapinero",
+        "venue": "Parque de los Hippies",
+        "description": "Lectura abierta de poesía con poetas locales y micrófono abierto. Trae tus versos.",
+        "category": "Literatura",
+        "free": true
+    },
+    {
+        "id": 2,
+        "title": "Cine al Aire Libre: Cine Colombiano",
+        "date": "2026-02-20",
+        "time": "18:30",
+        "locality": "Teusaquillo",
+        "venue": "Parque Simón Bolívar",
+        "description": "Proyección gratuita de películas colombianas independientes bajo las estrellas.",
+        "category": "Cine",
+        "free": true
+    },
+    {
+        "id": 3,
+        "title": "Taller de Muralismo Participativo",
+        "date": "2026-02-22",
+        "time": "09:00",
+        "locality": "La Candelaria",
+        "venue": "Calle del Embudo",
+        "description": "Aprende técnicas de muralismo y ayuda a pintar un nuevo mural comunitario. Materiales incluidos.",
+        "category": "Arte",
+        "free": true
+    },
+    {
+        "id": 4,
+        "title": "Ciclopaseo Nocturno",
+        "date": "2026-02-25",
+        "time": "19:00",
+        "locality": "Toda la ciudad",
+        "venue": "Salida: Plaza de Bolívar",
+        "description": "Recorrido nocturno en bicicleta por las calles iluminadas de Bogotá. 20km de pura magia urbana.",
+        "category": "Deporte",
+        "free": true
+    },
+    {
+        "id": 5,
+        "title": "Mercado Agroecológico",
+        "date": "2026-03-01",
+        "time": "07:00",
+        "locality": "Usaquén",
+        "venue": "Parque de Usaquén",
+        "description": "Productos orgánicos directo del campo a tu mesa. Apoya a los campesinos locales.",
+        "category": "Gastronomía",
+        "free": true
+    },
+    {
+        "id": 6,
+        "title": "Concierto: Sonidos del Sur",
+        "date": "2026-03-08",
+        "time": "16:00",
+        "locality": "Ciudad Bolívar",
+        "venue": "Casa de la Cultura",
+        "description": "Festival de músicas urbanas con artistas emergentes del sur de Bogotá.",
+        "category": "Música",
+        "free": true
+    },
+    {
+        "id": 7,
+        "title": "Feria del Libro Independiente",
+        "date": "2026-03-15",
+        "time": "10:00",
+        "locality": "La Candelaria",
+        "venue": "Centro Cultural Gabriel García Márquez",
+        "description": "Editoriales independientes, talleres de escritura y firmas de autores. Entrada libre.",
+        "category": "Literatura",
+        "free": true
+    },
+    {
+        "id": 8,
+        "title": "Yoga en el Parque",
+        "date": "2026-03-20",
+        "time": "06:30",
+        "locality": "Chapinero",
+        "venue": "Parque El Virrey",
+        "description": "Sesión gratuita de yoga al amanecer. Para todos los niveles. Trae tu mat.",
+        "category": "Bienestar",
+        "free": true
+    }
+]

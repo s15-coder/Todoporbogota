@@ -1,0 +1,108 @@
+{
+    "polls": [
+        {
+            "id": 1,
+            "question": "¿Cuál crees que es la mayor prioridad para Bogotá en 2026?",
+            "options": [
+                {
+                    "id": "a",
+                    "text": "Seguridad ciudadana",
+                    "votes": 342
+                },
+                {
+                    "id": "b",
+                    "text": "Movilidad y transporte",
+                    "votes": 287
+                },
+                {
+                    "id": "c",
+                    "text": "Educación pública",
+                    "votes": 198
+                },
+                {
+                    "id": "d",
+                    "text": "Medio ambiente",
+                    "votes": 156
+                }
+            ],
+            "totalVotes": 983,
+            "active": true
+        },
+        {
+            "id": 2,
+            "question": "¿Qué medio de transporte usas más en Bogotá?",
+            "options": [
+                {
+                    "id": "a",
+                    "text": "TransMilenio",
+                    "votes": 412
+                },
+                {
+                    "id": "b",
+                    "text": "Bicicleta",
+                    "votes": 289
+                },
+                {
+                    "id": "c",
+                    "text": "Carro particular",
+                    "votes": 178
+                },
+                {
+                    "id": "d",
+                    "text": "A pie",
+                    "votes": 134
+                }
+            ],
+            "totalVotes": 1013,
+            "active": true
+        },
+        {
+            "id": 3,
+            "question": "¿Cuál es tu lugar favorito para pasar un domingo en Bogotá?",
+            "options": [
+                {
+                    "id": "a",
+                    "text": "Ciclovía",
+                    "votes": 356
+                },
+                {
+                    "id": "b",
+                    "text": "Parques y cerros",
+                    "votes": 298
+                },
+                {
+                    "id": "c",
+                    "text": "Museos y galerías",
+                    "votes": 167
+                },
+                {
+                    "id": "d",
+                    "text": "Mercados y plazas",
+                    "votes": 201
+                }
+            ],
+            "totalVotes": 1022,
+            "active": false
+        }
+    ],
+    "discussions": [
+        {
+            "id": 1,
+            "prompt": "Si pudieras cambiar una sola cosa de Bogotá, ¿qué sería?",
+            "responses": 47,
+            "featured": true
+        },
+        {
+            "id": 2,
+            "prompt": "¿Qué barrio de Bogotá crees que tiene más potencial de transformación?",
+            "responses": 32,
+            "featured": true
+        },
+        {
+            "id": 3,
+            "prompt": "¿Cuál es la tradición bogotana que más te gusta?",
+            "responses": 28,
+            "featured": false
+        }
+    ]
+}

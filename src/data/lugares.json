@@ -1,0 +1,122 @@
+[
+    {
+        "id": 1,
+        "name": "Cerro de Monserrate",
+        "category": "Miradores",
+        "locality": "Santa Fe",
+        "description": "El mirador más emblemático de Bogotá. A 3,152 metros, ofrece una vista panorámica incomparable de la ciudad.",
+        "image": "/src/assets/bogota-photos/image_1.jpeg",
+        "communityRating": 4.8,
+        "recommended": true,
+        "tags": [
+            "Icónico",
+            "Naturaleza",
+            "Vista"
+        ]
+    },
+    {
+        "id": 2,
+        "name": "Biblioteca Virgilio Barco",
+        "category": "Bibliotecas",
+        "locality": "Teusaquillo",
+        "description": "Obra maestra de Rogelio Salmona. Un oasis de conocimiento rodeado de espejos de agua y jardines.",
+        "image": "/src/assets/bogota-photos/image_2.jpeg",
+        "communityRating": 4.7,
+        "recommended": true,
+        "tags": [
+            "Arquitectura",
+            "Cultura",
+            "Gratis"
+        ]
+    },
+    {
+        "id": 3,
+        "name": "Parque Simón Bolívar",
+        "category": "Parques",
+        "locality": "Teusaquillo",
+        "description": "El pulmón verde de Bogotá. 113 hectáreas de naturaleza en el corazón de la ciudad, perfecto para correr, pasear o hacer picnic.",
+        "image": "/src/assets/bogota-photos/image_3.jpeg",
+        "communityRating": 4.5,
+        "recommended": true,
+        "tags": [
+            "Naturaleza",
+            "Deporte",
+            "Gratis"
+        ]
+    },
+    {
+        "id": 4,
+        "name": "Café Azul y Rojo",
+        "category": "Cafés",
+        "locality": "La Candelaria",
+        "description": "Café artesanal en una casa colonial. El mejor café de origen con vista a la plaza del Chorro de Quevedo.",
+        "image": "/src/assets/bogota-photos/image_4.jpeg",
+        "communityRating": 4.6,
+        "recommended": false,
+        "tags": [
+            "Café",
+            "Colonial",
+            "Alternativo"
+        ]
+    },
+    {
+        "id": 5,
+        "name": "Teatro Jorge Eliécer Gaitán",
+        "category": "Centros Culturales",
+        "locality": "Santa Fe",
+        "description": "Espacio cultural emblemático que alberga teatro, danza y música. Programación gratuita frecuente.",
+        "image": "/src/assets/bogota-photos/image_5.jpg",
+        "communityRating": 4.4,
+        "recommended": false,
+        "tags": [
+            "Teatro",
+            "Cultura",
+            "Eventos"
+        ]
+    },
+    {
+        "id": 6,
+        "name": "La Quebrada La Vieja",
+        "category": "Miradores",
+        "locality": "Chapinero",
+        "description": "Sendero ecológico escondido en los cerros orientales. Una caminata corta que te aleja del ruido urbano.",
+        "image": "/src/assets/bogota-photos/image_6.jpg",
+        "communityRating": 4.9,
+        "recommended": true,
+        "tags": [
+            "Senderismo",
+            "Naturaleza",
+            "Alternativo"
+        ]
+    },
+    {
+        "id": 7,
+        "name": "Museo del Oro",
+        "category": "Centros Culturales",
+        "locality": "La Candelaria",
+        "description": "Alberga la colección de orfebrería prehispánica más grande del mundo. Entrada gratuita los domingos.",
+        "image": "/src/assets/bogota-photos/image_7.jpg",
+        "communityRating": 4.8,
+        "recommended": true,
+        "tags": [
+            "Museo",
+            "Historia",
+            "Icónico"
+        ]
+    },
+    {
+        "id": 8,
+        "name": "Usaquén - Mercado de las Pulgas",
+        "category": "Cafés",
+        "locality": "Usaquén",
+        "description": "Cada domingo, las calles empedradas de Usaquén se llenan de artesanías, comida y música en vivo.",
+        "image": "/src/assets/bogota-photos/image_8.jpg",
+        "communityRating": 4.3,
+        "recommended": false,
+        "tags": [
+            "Mercado",
+            "Artesanías",
+            "Gastronomía"
+        ]
+    }
+]

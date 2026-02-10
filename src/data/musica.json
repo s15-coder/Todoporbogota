@@ -1,0 +1,93 @@
+{
+    "artists": [
+        {
+            "id": 1,
+            "name": "Los Cerros",
+            "genre": "Indie Folk Andino",
+            "locality": "Chapinero",
+            "description": "Fusión de sonidos andinos con indie folk. Su música evoca los atardeceres bogotanos desde los cerros orientales.",
+            "image": "/src/assets/bogota-photos/image_3.jpeg",
+            "spotifyPlaceholder": true,
+            "featured": true
+        },
+        {
+            "id": 2,
+            "name": "La Séptima Sound",
+            "genre": "Electro-Cumbia",
+            "locality": "La Candelaria",
+            "description": "Colectivo que mezcla beats electrónicos con cumbia urbana. Cada canción es un viaje por la Carrera Séptima.",
+            "image": "/src/assets/bogota-photos/image_4.jpeg",
+            "spotifyPlaceholder": true,
+            "featured": true
+        },
+        {
+            "id": 3,
+            "name": "MC Candelaria",
+            "genre": "Hip Hop",
+            "locality": "Kennedy",
+            "description": "Rapera que narra la realidad de las calles bogotanas con rimas poderosas y beats contundentes.",
+            "image": "/src/assets/bogota-photos/image_5.jpg",
+            "spotifyPlaceholder": true,
+            "featured": false
+        },
+        {
+            "id": 4,
+            "name": "Páramo",
+            "genre": "Rock Alternativo",
+            "locality": "Teusaquillo",
+            "description": "Banda que captura la melancolía y energía de Bogotá en riffs de guitarra y letras introspectivas.",
+            "image": "/src/assets/bogota-photos/image_6.jpg",
+            "spotifyPlaceholder": true,
+            "featured": false
+        }
+    ],
+    "events": [
+        {
+            "id": 1,
+            "title": "Festival Suena Bogotá",
+            "date": "2026-03-15",
+            "venue": "Parque Simón Bolívar",
+            "description": "Festival gratuito que reúne lo mejor de la música emergente bogotana.",
+            "free": true
+        },
+        {
+            "id": 2,
+            "title": "Noche de Jam Session",
+            "date": "2026-02-20",
+            "venue": "Matik-Matik, Chapinero",
+            "description": "Sesiones de improvisación abiertas todos los jueves. Trae tu instrumento.",
+            "free": true
+        },
+        {
+            "id": 3,
+            "title": "Hip Hop al Parque",
+            "date": "2026-04-10",
+            "venue": "Parque El Country",
+            "description": "El festival de hip hop más grande de Latinoamérica, con artistas locales e internacionales.",
+            "free": true
+        }
+    ],
+    "playlists": [
+        {
+            "id": 1,
+            "title": "Bogotá Suena",
+            "description": "Lo mejor del sonido emergente bogotano",
+            "trackCount": 25,
+            "duration": "1h 32min"
+        },
+        {
+            "id": 2,
+            "title": "Cumbia Urbana BGT",
+            "description": "Ritmos tropicales con sabor capitalino",
+            "trackCount": 18,
+            "duration": "58min"
+        },
+        {
+            "id": 3,
+            "title": "Rap Bogotano",
+            "description": "Las voces del hip hop bogotano underground",
+            "trackCount": 30,
+            "duration": "1h 45min"
+        }
+    ]
+}

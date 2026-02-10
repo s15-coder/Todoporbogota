@@ -1,0 +1,76 @@
+/* Sostenible Page Styles */
+
+.sostenible__section {
+  margin-bottom: 3.5rem;
+}
+
+.sostenible__subtitle {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--color-text);
+  margin-bottom: 1.25rem;
+}
+
+.sostenible__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+@media (min-width: 640px) {
+  .sostenible__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.sostenible__impact {
+  margin-top: 0.75rem;
+  font-size: 0.85rem;
+  color: var(--color-success);
+  font-weight: 600;
+}
+
+/* Tips */
+.sostenible__tips {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+@media (min-width: 640px) {
+  .sostenible__tips {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 900px) {
+  .sostenible__tips {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.sostenible__tip {
+  display: flex;
+  gap: 1rem;
+  background: var(--color-surface);
+  padding: 1.25rem;
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.sostenible__tip-icon {
+  font-size: 2rem;
+  flex-shrink: 0;
+}
+
+.sostenible__tip h3 {
+  font-size: 1rem;
+  color: var(--color-text);
+  margin-bottom: 0.25rem;
+}
+
+.sostenible__tip p {
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+  line-height: 1.5;
+}

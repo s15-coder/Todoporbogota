@@ -1,0 +1,47 @@
+/* Lugares Page Styles */
+
+.lugares__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+@media (min-width: 640px) {
+  .lugares__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 900px) {
+  .lugares__grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.lugares__meta {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+}
+
+.lugares__rating {
+  font-size: 0.85rem;
+  color: var(--color-accent);
+  font-weight: 600;
+}
+
+.lugares__recommended {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--color-success);
+  background: rgba(76, 175, 80, 0.1);
+  padding: 0.2rem 0.6rem;
+  border-radius: 999px;
+}
+
+.lugares__empty {
+  text-align: center;
+  color: var(--color-text-muted);
+  padding: 3rem 0;
+}

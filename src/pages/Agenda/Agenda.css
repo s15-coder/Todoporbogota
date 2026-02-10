@@ -1,0 +1,111 @@
+/* Agenda Page Styles */
+
+.agenda__filters {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+@media (min-width: 640px) {
+  .agenda__filters {
+    flex-direction: row;
+    gap: 2rem;
+  }
+}
+
+.agenda__list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.agenda__event {
+  display: flex;
+  gap: 1rem;
+  background: var(--color-surface);
+  padding: 1.25rem;
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  transition: border-color 0.2s ease;
+}
+
+.agenda__event:hover {
+  border-color: rgba(255, 193, 7, 0.2);
+}
+
+.agenda__event-date {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-width: 60px;
+  padding: 0.5rem;
+  background: var(--color-accent);
+  color: var(--color-bg);
+  border-radius: var(--radius-sm);
+  text-align: center;
+  height: fit-content;
+}
+
+.agenda__day {
+  font-size: 1.5rem;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.agenda__month {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.agenda__event-body {
+  flex: 1;
+  min-width: 0;
+}
+
+.agenda__event-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.35rem;
+}
+
+.agenda__event-header h3 {
+  font-size: 1.05rem;
+  color: var(--color-text);
+  font-weight: 700;
+}
+
+.agenda__free {
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--color-success);
+  background: rgba(76, 175, 80, 0.1);
+  padding: 0.15rem 0.5rem;
+  border-radius: 999px;
+  text-transform: uppercase;
+}
+
+.agenda__event-body > p {
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+  line-height: 1.5;
+  margin-bottom: 0.5rem;
+}
+
+.agenda__event-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+}
+
+.agenda__empty {
+  text-align: center;
+  color: var(--color-text-muted);
+  padding: 3rem 0;
+}

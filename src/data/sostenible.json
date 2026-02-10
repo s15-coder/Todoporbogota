@@ -1,0 +1,74 @@
+{
+    "initiatives": [
+        {
+            "id": 1,
+            "title": "Red de Huertas Urbanas",
+            "category": "Huertas Urbanas",
+            "description": "Más de 50 huertas comunitarias distribuidas por toda la ciudad, produciendo alimentos orgánicos y fortaleciendo el tejido social.",
+            "image": "/src/assets/bogota-photos/image_1.jpeg",
+            "impact": "12 toneladas de alimentos orgánicos al año"
+        },
+        {
+            "id": 2,
+            "title": "Reciclaje con los Recicladores",
+            "category": "Reciclaje",
+            "description": "Programa de apoyo a los recicladores de oficio de Bogotá, dignificando su labor y mejorando las tasas de reciclaje.",
+            "image": "/src/assets/bogota-photos/image_2.jpeg",
+            "impact": "20,000 recicladores formalizados"
+        },
+        {
+            "id": 3,
+            "title": "Bogotá en Bici",
+            "category": "Movilidad Sostenible",
+            "description": "Con más de 550km de ciclorrutas, Bogotá es una de las ciudades más amigables con la bicicleta en Latinoamérica.",
+            "image": "/src/assets/bogota-photos/image_3.jpeg",
+            "impact": "800,000 viajes diarios en bicicleta"
+        },
+        {
+            "id": 4,
+            "title": "Corredores Verdes",
+            "category": "Medio Ambiente",
+            "description": "Proyecto de reforestación urbana que conecta parques y humedales a través de corredores ecológicos.",
+            "image": "/src/assets/bogota-photos/image_4.jpeg",
+            "impact": "100,000 árboles plantados"
+        }
+    ],
+    "tips": [
+        {
+            "id": 1,
+            "title": "Compostar en casa",
+            "description": "Reduce tu basura hasta un 40% compostando residuos orgánicos. En Bogotá hay talleres gratuitos para aprender.",
+            "icon": "🌱"
+        },
+        {
+            "id": 2,
+            "title": "Usa la bici",
+            "description": "Bogotá tiene la red de ciclorrutas más extensa de Latinoamérica. Aprovéchala para tus desplazamientos diarios.",
+            "icon": "🚲"
+        },
+        {
+            "id": 3,
+            "title": "Compra local",
+            "description": "Visita los mercados campesinos y agroecológicos. Apoyas al campo y reduces la huella de carbono.",
+            "icon": "🛒"
+        },
+        {
+            "id": 4,
+            "title": "Ahorra agua",
+            "description": "Bogotá depende de los páramos. Cada gota cuenta. Repara fugas y usa el agua de lluvia para tus plantas.",
+            "icon": "💧"
+        },
+        {
+            "id": 5,
+            "title": "Separa residuos",
+            "description": "Bolsa blanca para reciclables, negra para no reciclables, verde para orgánicos. Es ley y es responsabilidad de todos.",
+            "icon": "♻️"
+        },
+        {
+            "id": 6,
+            "title": "Apoya al reciclador",
+            "description": "Entrega tus reciclables directamente al reciclador de tu zona. Están registrados y hacen un trabajo vital.",
+            "icon": "🤝"
+        }
+    ]
+}

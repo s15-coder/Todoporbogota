@@ -1,0 +1,82 @@
+[
+    {
+        "id": 1,
+        "year": 1538,
+        "title": "Fundación de Bogotá",
+        "description": "Gonzalo Jiménez de Quesada funda Santa Fe de Bogotá el 6 de agosto de 1538, en territorio Muisca.",
+        "type": "Fundación",
+        "lesserKnown": false
+    },
+    {
+        "id": 2,
+        "year": 1810,
+        "title": "El Grito de Independencia",
+        "description": "El 20 de julio, el famoso incidente del Florero de Llorente desencadena el movimiento independentista.",
+        "type": "Independencia",
+        "lesserKnown": false
+    },
+    {
+        "id": 3,
+        "year": 1884,
+        "title": "El Primer Tranvía",
+        "description": "Bogotá estrena su primer tranvía de mulas, conectando la Plaza de Bolívar con Chapinero. Fue el inicio del transporte público en la ciudad.",
+        "type": "Transporte",
+        "lesserKnown": true
+    },
+    {
+        "id": 4,
+        "year": 1948,
+        "title": "El Bogotazo",
+        "description": "El asesinato de Jorge Eliécer Gaitán el 9 de abril desata una ola de violencia que transforma la ciudad para siempre.",
+        "type": "Política",
+        "lesserKnown": false
+    },
+    {
+        "id": 5,
+        "year": 1974,
+        "title": "La Leyenda del Túnel de la Candelaria",
+        "description": "Se descubre un sistema de túneles coloniales bajo La Candelaria. La leyenda cuenta que conectaban iglesias con conventos para escapar en caso de ataque.",
+        "type": "Leyenda Urbana",
+        "lesserKnown": true
+    },
+    {
+        "id": 6,
+        "year": 1998,
+        "title": "Bogotá Sin Carro",
+        "description": "Se implementa el primer Día Sin Carro, una iniciativa pionera que luego sería replicada en ciudades de todo el mundo.",
+        "type": "Movilidad",
+        "lesserKnown": false
+    },
+    {
+        "id": 7,
+        "year": 2000,
+        "title": "Nace TransMilenio",
+        "description": "Se inaugura el sistema de transporte masivo TransMilenio, transformando la movilidad de la capital.",
+        "type": "Transporte",
+        "lesserKnown": false
+    },
+    {
+        "id": 8,
+        "year": 2007,
+        "title": "El Fantasma del Teatro Colón",
+        "description": "Durante la restauración del Teatro Colón, trabajadores reportaron apariciones nocturnas. La leyenda dice que el fantasma de una actriz del siglo XIX recorre los pasillos.",
+        "type": "Leyenda Urbana",
+        "lesserKnown": true
+    },
+    {
+        "id": 9,
+        "year": 2015,
+        "title": "Bogotá, Capital Mundial del Libro",
+        "description": "La UNESCO designa a Bogotá como Capital Mundial del Libro, reconociendo su vibrante escena literaria y sus bibliotecas públicas.",
+        "type": "Cultura",
+        "lesserKnown": false
+    },
+    {
+        "id": 10,
+        "year": 2024,
+        "title": "Primera Línea del Metro",
+        "description": "Avanzan las obras de la primera línea del metro de Bogotá, un sueño de más de 80 años que comienza a materializarse.",
+        "type": "Transporte",
+        "lesserKnown": false
+    }
+]

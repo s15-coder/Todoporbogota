@@ -1,0 +1,110 @@
+[
+    {
+        "id": 1,
+        "title": "Amanecer desde Monserrate",
+        "author": "Sebastián Torres",
+        "image": "/src/assets/bogota-photos/image_1.jpeg",
+        "location": "Monserrate",
+        "tags": [
+            "Amanecer",
+            "Cerros",
+            "Paisaje"
+        ]
+    },
+    {
+        "id": 2,
+        "title": "Colores de La Candelaria",
+        "author": "María Camila R.",
+        "image": "/src/assets/bogota-photos/image_2.jpeg",
+        "location": "La Candelaria",
+        "tags": [
+            "Arquitectura",
+            "Colonial",
+            "Color"
+        ]
+    },
+    {
+        "id": 3,
+        "title": "Ciclovía dominical",
+        "author": "Carlos Peña",
+        "image": "/src/assets/bogota-photos/image_3.jpeg",
+        "location": "Carrera Séptima",
+        "tags": [
+            "Ciclismo",
+            "Domingo",
+            "Comunidad"
+        ]
+    },
+    {
+        "id": 4,
+        "title": "Graffiti en el centro",
+        "author": "Colectivo Raíces",
+        "image": "/src/assets/bogota-photos/image_4.jpeg",
+        "location": "Centro",
+        "tags": [
+            "Arte Urbano",
+            "Graffiti",
+            "Cultura"
+        ]
+    },
+    {
+        "id": 5,
+        "title": "Atardecer bogotano",
+        "author": "Andrea López",
+        "image": "/src/assets/bogota-photos/image_5.jpg",
+        "location": "Parque Simón Bolívar",
+        "tags": [
+            "Atardecer",
+            "Naturaleza",
+            "Ciudad"
+        ]
+    },
+    {
+        "id": 6,
+        "title": "Mercado de Paloquemao",
+        "author": "Doña Rosalba M.",
+        "image": "/src/assets/bogota-photos/image_6.jpg",
+        "location": "Paloquemao",
+        "tags": [
+            "Gastronomía",
+            "Mercado",
+            "Tradición"
+        ]
+    },
+    {
+        "id": 7,
+        "title": "Lluvia en la Séptima",
+        "author": "Sebastián Torres",
+        "image": "/src/assets/bogota-photos/image_7.jpg",
+        "location": "Carrera Séptima",
+        "tags": [
+            "Lluvia",
+            "Urbano",
+            "Cotidiano"
+        ]
+    },
+    {
+        "id": 8,
+        "title": "Cerros al atardecer",
+        "author": "María Camila R.",
+        "image": "/src/assets/bogota-photos/image_8.jpg",
+        "location": "Chapinero",
+        "tags": [
+            "Cerros",
+            "Naturaleza",
+            "Paisaje"
+        ]
+    },
+    {
+        "id": 9,
+        "title": "Vida nocturna en la Zona T",
+        "author": "Carlos Peña",
+        "image": "/src/assets/bogota-photos/image_9.jpg",
+        "location": "Zona T",
+        "tags": [
+            "Noche",
+            "Ciudad",
+            "Luces"
+        ]
+    }
+]

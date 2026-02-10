@@ -1,0 +1,80 @@
+[
+    {
+        "id": 1,
+        "name": "María Camila Rodríguez",
+        "role": "Artista Urbana",
+        "locality": "La Candelaria",
+        "photo": "/src/assets/bogota-photos/image_1.jpeg",
+        "story": "Desde hace 8 años transforma muros grises en lienzos de color. Sus murales cuentan historias de resistencia y esperanza en los barrios más antiguos de Bogotá.",
+        "tags": [
+            "Arte",
+            "Muralismo",
+            "Comunidad"
+        ]
+    },
+    {
+        "id": 2,
+        "name": "Carlos Andrés Peña",
+        "role": "Fundador - Bici-Escuela Popular",
+        "locality": "Teusaquillo",
+        "photo": "/src/assets/bogota-photos/image_2.jpeg",
+        "story": "Ex mensajero en bicicleta que ahora enseña mecánica y seguridad vial a cientos de bogotanos. Su lema: 'La bici es libertad'.",
+        "tags": [
+            "Movilidad",
+            "Educación",
+            "Ciclismo"
+        ]
+    },
+    {
+        "id": 3,
+        "name": "Colectivo Raíces Urbanas",
+        "role": "Colectivo Cultural",
+        "locality": "Suba",
+        "photo": "/src/assets/bogota-photos/image_3.jpeg",
+        "story": "Un grupo de jóvenes que fusiona música tradicional colombiana con ritmos urbanos, llevando conciertos gratuitos a parques y plazas.",
+        "tags": [
+            "Música",
+            "Cultura",
+            "Juventud"
+        ]
+    },
+    {
+        "id": 4,
+        "name": "Doña Rosalba Méndez",
+        "role": "Líder Comunitaria",
+        "locality": "Ciudad Bolívar",
+        "photo": "/src/assets/bogota-photos/image_4.jpeg",
+        "story": "A sus 67 años, gestiona el comedor comunitario más grande de su localidad, alimentando a más de 200 personas diariamente.",
+        "tags": [
+            "Liderazgo",
+            "Social",
+            "Alimentación"
+        ]
+    },
+    {
+        "id": 5,
+        "name": "Sebastián Torres",
+        "role": "Fotógrafo Documental",
+        "locality": "Chapinero",
+        "photo": "/src/assets/bogota-photos/image_5.jpg",
+        "story": "Documenta la transformación urbana de Bogotá a través de su lente. Su proyecto 'Bogotá Invisible' muestra los rincones que nadie ve.",
+        "tags": [
+            "Fotografía",
+            "Documentación",
+            "Ciudad"
+        ]
+    },
+    {
+        "id": 6,
+        "name": "Andrea López",
+        "role": "Ingeniera Ambiental",
+        "locality": "Usaquén",
+        "photo": "/src/assets/bogota-photos/image_6.jpg",
+        "story": "Lidera la red de huertas comunitarias más grande de Bogotá, convirtiendo lotes abandonados en espacios verdes productivos.",
+        "tags": [
+            "Medio Ambiente",
+            "Agricultura Urbana",
+            "Sostenibilidad"
+        ]
+    }
+]
