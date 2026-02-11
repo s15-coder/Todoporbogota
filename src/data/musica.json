@@ -6,7 +6,7 @@
             "genre": "Indie Folk Andino",
             "locality": "Chapinero",
             "description": "Fusión de sonidos andinos con indie folk. Su música evoca los atardeceres bogotanos desde los cerros orientales.",
-            "image": "/src/assets/bogota-photos/image_3.jpeg",
+            "image": "/bogota-photos/image_3.jpeg",
             "spotifyPlaceholder": true,
             "featured": true
         },
@@ -16,7 +16,7 @@
             "genre": "Electro-Cumbia",
             "locality": "La Candelaria",
             "description": "Colectivo que mezcla beats electrónicos con cumbia urbana. Cada canción es un viaje por la Carrera Séptima.",
-            "image": "/src/assets/bogota-photos/image_4.jpeg",
+            "image": "/bogota-photos/image_4.jpeg",
             "spotifyPlaceholder": true,
             "featured": true
         },
@@ -26,7 +26,7 @@
             "genre": "Hip Hop",
             "locality": "Kennedy",
             "description": "Rapera que narra la realidad de las calles bogotanas con rimas poderosas y beats contundentes.",
-            "image": "/src/assets/bogota-photos/image_5.jpg",
+            "image": "/bogota-photos/image_5.jpg",
             "spotifyPlaceholder": true,
             "featured": false
         },
@@ -36,7 +36,7 @@
             "genre": "Rock Alternativo",
             "locality": "Teusaquillo",
             "description": "Banda que captura la melancolía y energía de Bogotá en riffs de guitarra y letras introspectivas.",
-            "image": "/src/assets/bogota-photos/image_6.jpg",
+            "image": "/bogota-photos/image_6.jpg",
             "spotifyPlaceholder": true,
             "featured": false
         }

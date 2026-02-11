@@ -37,7 +37,7 @@ export default function Home() {
                     </div>
                 </div>
                 <div className="home__hero-visual">
-                    <img src="/src/assets/identity/coat_of_arms.png" alt="Escudo de Bogotá" className="home__coat" />
+                    <img src="/identity/coat_of_arms.png" alt="Escudo de Bogotá" className="home__coat" />
                 </div>
             </section>
 

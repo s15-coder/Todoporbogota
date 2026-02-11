@@ -5,7 +5,7 @@
             "title": "Red de Huertas Urbanas",
             "category": "Huertas Urbanas",
             "description": "Más de 50 huertas comunitarias distribuidas por toda la ciudad, produciendo alimentos orgánicos y fortaleciendo el tejido social.",
-            "image": "/src/assets/bogota-photos/image_1.jpeg",
+            "image": "/bogota-photos/image_1.jpeg",
             "impact": "12 toneladas de alimentos orgánicos al año"
         },
         {
@@ -13,7 +13,7 @@
             "title": "Reciclaje con los Recicladores",
             "category": "Reciclaje",
             "description": "Programa de apoyo a los recicladores de oficio de Bogotá, dignificando su labor y mejorando las tasas de reciclaje.",
-            "image": "/src/assets/bogota-photos/image_2.jpeg",
+            "image": "/bogota-photos/image_2.jpeg",
             "impact": "20,000 recicladores formalizados"
         },
         {
@@ -21,7 +21,7 @@
             "title": "Bogotá en Bici",
             "category": "Movilidad Sostenible",
             "description": "Con más de 550km de ciclorrutas, Bogotá es una de las ciudades más amigables con la bicicleta en Latinoamérica.",
-            "image": "/src/assets/bogota-photos/image_3.jpeg",
+            "image": "/bogota-photos/image_3.jpeg",
             "impact": "800,000 viajes diarios en bicicleta"
         },
         {
@@ -29,7 +29,7 @@
             "title": "Corredores Verdes",
             "category": "Medio Ambiente",
             "description": "Proyecto de reforestación urbana que conecta parques y humedales a través de corredores ecológicos.",
-            "image": "/src/assets/bogota-photos/image_4.jpeg",
+            "image": "/bogota-photos/image_4.jpeg",
             "impact": "100,000 árboles plantados"
         }
     ],
