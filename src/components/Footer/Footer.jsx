@@ -14,7 +14,7 @@ export default function Footer() {
                 <div className="footer__brand">
                     <img src="/identity/flag.png" alt="todoporbogota logo" className="footer__logo" />
                     <h3>todoporbogota</h3>
-                    <p>Una plataforma comunpmnitaria para celebrar, transformar y conectar con Bogotá.</p>
+                    <p>Una plataforma comunitaria para celebrar, transformar y conectar con Bogotá.</p>
                 </div>
 
                 <div className="footer__links">
