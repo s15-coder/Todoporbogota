@@ -12,9 +12,9 @@ export default function Footer() {
         <footer className="footer">
             <div className="footer__container">
                 <div className="footer__brand">
-                    <span className="footer__logo">🏙️</span>
+                    <img src="/identity/flag.png" alt="todoporbogota logo" className="footer__logo" />
                     <h3>todoporbogota</h3>
-                    <p>Una plataforma comunitaria para celebrar, transformar y conectar con Bogotá.</p>
+                    <p>Una plataforma comunpmnitaria para celebrar, transformar y conectar con Bogotá.</p>
                 </div>
 
                 <div className="footer__links">

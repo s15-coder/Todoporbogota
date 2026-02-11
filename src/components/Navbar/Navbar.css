@@ -33,7 +33,9 @@
 }
 
 .navbar__logo {
-  font-size: 1.5rem;
+  height: 1.5rem;
+  width: auto;
+  display: block;
 }
 
 .navbar__title {

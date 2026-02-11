@@ -30,7 +30,7 @@ export default function Navbar() {
         <nav className="navbar">
             <div className="navbar__container">
                 <NavLink to="/" className="navbar__brand" onClick={() => setMenuOpen(false)}>
-                    <span className="navbar__logo">🏙️</span>
+                    <img src="/identity/flag.png" alt="todoporbogota logo" className="navbar__logo" />
                     <span className="navbar__title">todoporbogota</span>
                 </NavLink>
 
