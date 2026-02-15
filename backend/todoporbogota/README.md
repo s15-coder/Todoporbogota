@@ -51,5 +51,3 @@ Respuesta Exitosa (200):
 ## 5. Solución de Problemas
 * Error de Autenticación: Verifica que el usuario de base de datos tenga permisos de lectura y escritura en Atlas.
 * Error de Conexión: Asegúrate de que la IP 0.0.0.0/0 esté permitida en Network Access de Atlas.
-
-#Esta es una prueba
