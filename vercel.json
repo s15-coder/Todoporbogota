@@ -1,6 +1,6 @@
 {
     "version": 2,
-    "buildCommand": "bash .scripts/deployment.sh && cd backend/todoporbogota && npm install && npm run build",
+    "buildCommand": "bash .scripts/build-deploy.sh && cd backend/todoporbogota && npm install && npm run build",
     "outputDirectory": "backend/todoporbogota",
     "functions": {
         "api/index.ts": {
