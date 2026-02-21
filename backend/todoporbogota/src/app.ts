@@ -18,8 +18,8 @@ app.get("/api", (_req, res) => {
 app.use(express.static(path.join(__dirname, "../view")));
 
 // SPA fallback - serve index.html for all non-API requests
-app.get("*", (_req, res) => {
-    res.sendFile(path.join(__dirname, "../view/index.html"));
+app.use((req, res) => {
+    res.status(404).send('Not found');
 });
 
 export default app;
