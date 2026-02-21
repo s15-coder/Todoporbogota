@@ -29,3 +29,4 @@ backend/todoporbogota/dist/
 dist
 api/*.js
 api/*.d.ts
+.vercel
