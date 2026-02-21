@@ -1,9 +1,9 @@
 {
     "version": 2,
-    "buildCommand": "bash .scripts/deployment.sh && cd backend/todoporbogota && npm install && npm run build && npx tsc ../../api/index.ts --outDir ../../api --esModuleInterop --resolveJsonModule --moduleResolution node",
+    "buildCommand": "bash .scripts/deployment.sh && cd backend/todoporbogota && npm install && npm run build",
     "outputDirectory": "backend/todoporbogota",
     "functions": {
-        "api/index.js": {
+        "api/index.ts": {
             "memory": 1024,
             "maxDuration": 10
         }
@@ -11,11 +11,11 @@
     "routes": [
         {
             "src": "/api/.*",
-            "dest": "/api/index.js"
+            "dest": "/api/index.ts"
         },
         {
             "src": "/(.*)",
-            "dest": "/api/index.js"
+            "dest": "/api/index.ts"
         }
     ]
 }
