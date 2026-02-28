@@ -1,10 +1,28 @@
 import { Schema, model, Document } from "mongoose";
 
-const UserSchema = new Schema({
-  name: { type: String, required: true },
-  email: { type: String, required: true, unique: true },
-  avatar: { type: String },
-  googleId: { type: String }, // Identificador único de Google
-}, { timestamps: true });
+export interface IUser extends Document {
+  name: string;
+  email: string;
+  avatar?: string;
+  googleId?: string;
+  role: "admin" | "moderator" | "citizen";
+  createdAt: Date;
+  updatedAt: Date;
+}
 
-export const User = model('User', UserSchema);
+const UserSchema = new Schema(
+  {
+    name: { type: String, required: true },
+    email: { type: String, required: true, unique: true },
+    avatar: { type: String },
+    googleId: { type: String },
+    role: {
+      type: String,
+      enum: ["admin", "moderator", "citizen"],
+      default: "citizen",
+    },
+  },
+  { timestamps: true }
+);
+
+export const User = model<IUser>("User", UserSchema);
