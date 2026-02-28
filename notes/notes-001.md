@@ -1,3 +1,0 @@
-- Hacer administrador a Pablo. PENDING
-- Nadie pueda hacer push directamente a la master.
-- Pull request deben requerir al menos un approve.
