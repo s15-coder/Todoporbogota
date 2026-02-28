@@ -1,16 +1,64 @@
-# React + Vite
+# Todo por Bogotá Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Frontend principal de la plataforma Todo por Bogotá.
+Stack: React 19 + Vite + React Router.
 
-Currently, two official plugins are available:
+## Ejecutar en local
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+```bash
+cd frontend/todoporbogota
+npm install
+npm run dev
+```
 
-## React Compiler
+App en desarrollo: `http://localhost:5173`
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Variables de entorno
 
-## Expanding the ESLint configuration
+Crea `frontend/todoporbogota/.env` con:
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+```env
+VITE_GOOGLE_CLIENT_ID=tu_cliente_id_de_google.apps.googleusercontent.com
+VITE_API_URL=http://localhost:5000
+```
+
+Notas:
+
+- `VITE_GOOGLE_CLIENT_ID` debe coincidir con el `GOOGLE_CLIENT_ID` del backend.
+- En Google Cloud Console agrega `http://localhost:5173` como Authorized JavaScript Origin.
+
+## Flujo de autenticación actual
+
+- Botón en navbar: **Regístrate o Ingresa**.
+- Abre popup con proveedores (Google activo, Facebook próximamente).
+- Login con Google llama `POST /api/users/google-login`.
+- Sesión persistida en `localStorage` (`authToken`, `authUser`).
+- Avatar en navbar abre menú con:
+	- **Ver mi perfil**
+	- **Cerrar sesión**
+
+## Ruta de perfil
+
+- Ruta frontend: `/perfil`
+- Página consume `GET /api/users/me` usando `Authorization: Bearer <token>`.
+- Muestra datos del usuario autenticado (`name`, `email`, `avatar`, `role`, `createdAt`).
+
+## Scripts
+
+- `npm run dev`: desarrollo con HMR
+- `npm run build`: build de producción
+- `npm run preview`: previsualizar build local
+
+## Build para flujo de deploy del monorepo
+
+Este frontend se compila y se mueve al backend (`backend/todoporbogota/view`) mediante el script raíz:
+
+```bash
+sh .scripts/build-deploy.sh
+```
+
+En Windows, si `sh` falla en PowerShell, ejecuta con Git Bash:
+
+```powershell
+& "C:\Program Files\Git\bin\bash.exe" .scripts/build-deploy.sh
+```

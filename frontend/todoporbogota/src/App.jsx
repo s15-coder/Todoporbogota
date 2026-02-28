@@ -19,6 +19,7 @@ import Agenda from './pages/Agenda/Agenda'
 import Sostenible from './pages/Sostenible/Sostenible'
 import Opina from './pages/Opina/Opina'
 import Visual from './pages/Visual/Visual'
+import Perfil from './pages/Perfil/Perfil'
 
 export default function App() {
   return (
@@ -36,6 +37,7 @@ export default function App() {
           <Route path="/sostenible" element={<Sostenible />} />
           <Route path="/opina" element={<Opina />} />
           <Route path="/visual" element={<Visual />} />
+          <Route path="/perfil" element={<Perfil />} />
         </Route>
       </Routes>
     </BrowserRouter>
