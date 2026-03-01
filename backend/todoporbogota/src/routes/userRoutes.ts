@@ -2,6 +2,7 @@ import { Router } from 'express';
 import { OAuth2Client } from 'google-auth-library';
 import jwt from 'jsonwebtoken';
 import { User } from '../models/User';
+import { AuthRequest, authenticate } from '../middleware/auth';
 
 const router = Router();
 const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
@@ -37,6 +38,18 @@ router.post('/google-login', async (req, res) => {
     res.json({ user, token });
   } catch (error) {
     res.status(500).json({ error: 'Error en el servidor' });
+  }
+});
+
+router.get('/me', authenticate, async (req: AuthRequest, res) => {
+  try {
+    if (!req.user) {
+      return res.status(401).json({ error: 'No autenticado.' });
+    }
+
+    return res.json({ user: req.user });
+  } catch (error) {
+    return res.status(500).json({ error: 'Error en el servidor' });
   }
 });
 

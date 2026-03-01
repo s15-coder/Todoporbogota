@@ -1,53 +1,99 @@
-# TodoPorBogota API - Backend
+# Todo por Bogotá Backend API
 
-Servidor central para la gestión de usuarios y autenticación de la plataforma TodoPorBogota. Construido con Node.js, TypeScript y MongoDB.
+Backend principal de autenticación y datos para la app Todo por Bogotá.
+Stack: Express + TypeScript + MongoDB (Mongoose) + Google OAuth + JWT.
 
-## 1. Requisitos
-* Node.js v18 o superior.
-* MongoDB Atlas (Cluster configurado).
-* Google Cloud Console (ID de Cliente OAuth 2.0).
+## Requisitos
 
-## 2. Instalación y Configuración
+- Node.js 18+
+- MongoDB (Atlas o local)
+- OAuth Client ID de Google (Web)
 
-1. Clonar el proyecto e instalar dependencias:
-   npm install
+## Variables de entorno
 
-2. Configurar variables de entorno:
-   Crea un archivo llamado .env en la raíz del proyecto:
-   
-   PORT=4000
-   MONGO_URI=mongodb+srv://USUARIO:PASSWORD@cluster.mongodb.net/todoporbogota
-   GOOGLE_CLIENT_ID=tu_cliente_id_de_google.apps.googleusercontent.com
-   JWT_SECRET=una_clave_secreta_para_firmar_tokens
+Crea `backend/todoporbogota/.env` con:
 
-3. Iniciar el servidor:
-   npm run dev
+```env
+PORT=5000
+MONGO_URI=mongodb+srv://USUARIO:PASSWORD@cluster.mongodb.net/todoporbogota
+GOOGLE_CLIENT_ID=tu_cliente_id_de_google.apps.googleusercontent.com
+JWT_SECRET=una_clave_larga_y_segura
+```
 
-## 3. Endpoints
+## Ejecutar en local
 
-POST /api/users/google-login
-Recibe un idToken de Google, valida el usuario y retorna un JWT.
+```bash
+cd backend/todoporbogota
+npm install
+npm run dev
+```
 
-Cuerpo (JSON):
+Servidor por defecto: `http://localhost:5000`
+
+## Endpoints de autenticación
+
+### `POST /api/users/google-login`
+
+Valida el token de Google, registra usuario si no existe y devuelve JWT + usuario.
+
+Body:
+
+```json
 {
-  "idToken": "token_proporcionado_por_la_app_movil"
+  "idToken": "token_de_google"
 }
+```
 
-Respuesta Exitosa (200):
+Respuesta 200:
+
+```json
 {
-  "token": "jwt_del_backend",
+  "token": "jwt_firmado_por_backend",
   "user": {
+    "_id": "...",
     "name": "Nombre",
-    "email": "correo@gmail.com"
+    "email": "correo@gmail.com",
+    "avatar": "https://...",
+    "role": "citizen",
+    "createdAt": "...",
+    "updatedAt": "..."
   }
 }
+```
 
-## 4. Estructura de Carpetas
-* src/config: Configuración de DB.
-* src/controllers: Funciones de manejo de rutas.
-* src/models: Definición de esquemas (Mongoose).
-* src/routes: Definición de rutas Express.
+### `GET /api/users/me`
 
-## 5. Solución de Problemas
-* Error de Autenticación: Verifica que el usuario de base de datos tenga permisos de lectura y escritura en Atlas.
-* Error de Conexión: Asegúrate de que la IP 0.0.0.0/0 esté permitida en Network Access de Atlas.
+Retorna el usuario autenticado a partir del JWT.
+
+Header requerido:
+
+```http
+Authorization: Bearer <token>
+```
+
+Respuesta 200:
+
+```json
+{
+  "user": {
+    "_id": "...",
+    "name": "Nombre",
+    "email": "correo@gmail.com",
+    "avatar": "https://...",
+    "role": "citizen",
+    "createdAt": "...",
+    "updatedAt": "..."
+  }
+}
+```
+
+## Scripts
+
+- `npm run dev`: modo desarrollo con recarga
+- `npm run build`: compila TypeScript a `dist`
+- `npm start`: ejecuta build compilado
+
+## Notas
+
+- Este backend también sirve el frontend compilado desde `backend/todoporbogota/view` en flujo de deploy.
+- Si usas frontend en dev (`localhost:5173`), configura `VITE_API_URL=http://localhost:5000` en el frontend.
