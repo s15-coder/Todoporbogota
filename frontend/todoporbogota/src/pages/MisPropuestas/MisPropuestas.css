@@ -1,0 +1,82 @@
+/* Mis Propuestas Page */
+
+.mis-propuestas__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 2rem;
+}
+
+.mis-propuestas__empty {
+  text-align: center;
+  padding: 3rem 1rem;
+  background: var(--color-surface);
+  border-radius: var(--radius-lg);
+  border: 1px dashed rgba(255, 255, 255, 0.1);
+}
+
+.mis-propuestas__empty p {
+  color: var(--color-text-muted);
+  margin-bottom: 1.25rem;
+}
+
+.mis-propuestas__loading {
+  color: var(--color-text-muted);
+  text-align: center;
+  padding: 2rem;
+}
+
+.mis-propuestas__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  max-width: 640px;
+}
+
+@media (min-width: 640px) {
+  .mis-propuestas__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.mis-propuestas__card-wrapper {
+  position: relative;
+}
+
+.mis-propuestas__card-wrapper .card {
+  height: 100%;
+}
+
+.mis-propuestas__card-footer {
+  margin-top: 0.75rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.mis-propuestas__meta-fecha {
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+}
+
+.mis-propuestas__actions-card {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.mis-propuestas__btn-eliminar:hover {
+  border-color: var(--color-error);
+  color: var(--color-error);
+}
+
+.mis-propuestas__btn-aprobar:hover {
+  border-color: var(--color-success);
+  color: var(--color-success);
+}
+
+.mis-propuestas__btn-rechazar:hover {
+  border-color: var(--color-error);
+  color: var(--color-error);
+}

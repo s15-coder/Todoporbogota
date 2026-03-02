@@ -8,8 +8,15 @@ app.use(cors());
 app.use(express.json());
 
 app.use("/api/users", userRoutes);
+
 app.get("/", (_req, res) => {
-    res.send("API Running...");
+    res.json({
+        ok: true,
+        message: "API Todoporbogota funcionando",
+        endpoints: {
+            api: "/api/users",
+        },
+    });
 });
 
 export default app;

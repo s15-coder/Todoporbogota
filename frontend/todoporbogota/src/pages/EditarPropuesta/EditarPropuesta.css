@@ -1,0 +1,12 @@
+/* Editar Propuesta — reusa estilos de PostularIniciativa */
+
+.editar-propuesta {
+  max-width: 560px;
+  margin: 0 auto 3rem;
+}
+
+.editar-propuesta__loading {
+  color: var(--color-text-muted);
+  text-align: center;
+  padding: 2rem;
+}

@@ -1,5 +1,12 @@
 /* Iniciativas Page Styles */
 
+.iniciativas__ctas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 2rem;
+}
+
 .iniciativas__featured {
   margin-bottom: 3rem;
 }
@@ -51,6 +58,34 @@
 .iniciativas__empty {
   text-align: center;
   color: var(--color-text-muted);
-  padding: 3rem 0;
+  padding: 3rem 1rem;
   font-size: 1rem;
+}
+
+.iniciativas__empty-hint {
+  margin-top: 0.5rem;
+  font-size: 0.95rem;
+  opacity: 0.9;
+}
+
+.iniciativas__empty-cta {
+  margin-top: 1.25rem;
+}
+
+/* Badge "Tu propuesta" en cards de iniciativas postuladas por el usuario */
+.iniciativas__badge-user {
+  display: inline-block;
+  margin-top: 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--color-bg);
+  background: var(--color-secondary);
+  padding: 0.25rem 0.6rem;
+  border-radius: 999px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.card--user-proposal {
+  border-color: rgba(0, 188, 212, 0.35);
 }

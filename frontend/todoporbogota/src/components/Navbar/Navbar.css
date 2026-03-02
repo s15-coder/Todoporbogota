@@ -42,6 +42,72 @@
   letter-spacing: -0.5px;
 }
 
+.navbar__right {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Ver como visitante — ver iniciativas como si no fueran tuyas */
+.navbar__visitor-btn {
+  flex-shrink: 0;
+  padding: 0.35rem 0.7rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 999px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.navbar__visitor-btn:hover {
+  color: var(--color-text);
+  border-color: rgba(255, 255, 255, 0.35);
+}
+
+.navbar__visitor-btn--on {
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--color-text);
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+/* Botón Modo admin — destacado, diferenciado del menú */
+.navbar__admin-btn {
+  flex-shrink: 0;
+  padding: 0.4rem 0.85rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--color-secondary);
+  background: transparent;
+  border: 2px solid var(--color-secondary);
+  border-radius: 999px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.navbar__admin-btn:hover {
+  background: rgba(0, 188, 212, 0.15);
+  color: var(--color-text);
+}
+
+.navbar__admin-btn--on {
+  background: var(--color-secondary);
+  color: var(--color-bg);
+  border-color: var(--color-secondary);
+}
+
+.navbar__admin-btn--on:hover {
+  background: #00acc1;
+  border-color: #00acc1;
+  color: var(--color-bg);
+}
+
 /* Hamburger button */
 .navbar__toggle {
   display: flex;
@@ -94,6 +160,7 @@
   overflow-y: auto;
 }
 
+
 .navbar__links--open {
   transform: translateX(0);
 }
@@ -123,6 +190,10 @@
 @media (min-width: 900px) {
   .navbar__toggle {
     display: none;
+  }
+
+  .navbar__right {
+    gap: 1rem;
   }
 
   .navbar__links {

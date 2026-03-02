@@ -19,6 +19,12 @@ import Agenda from './pages/Agenda/Agenda'
 import Sostenible from './pages/Sostenible/Sostenible'
 import Opina from './pages/Opina/Opina'
 import Visual from './pages/Visual/Visual'
+import PostularIniciativa from './pages/PostularIniciativa/PostularIniciativa'
+import MisPropuestas from './pages/MisPropuestas/MisPropuestas'
+import EditarPropuesta from './pages/EditarPropuesta/EditarPropuesta'
+import Moderacion from './pages/Moderacion/Moderacion'
+import ModeracionConversacion from './pages/ModeracionConversacion/ModeracionConversacion'
+import VerConversacion from './pages/VerConversacion/VerConversacion'
 
 export default function App() {
   return (
@@ -28,6 +34,12 @@ export default function App() {
         <Route element={<Layout />}>
           <Route path="/" element={<Home />} />
           <Route path="/iniciativas" element={<Iniciativas />} />
+          <Route path="/iniciativas/postular" element={<PostularIniciativa />} />
+          <Route path="/iniciativas/mis-propuestas" element={<MisPropuestas />} />
+          <Route path="/iniciativas/mis-propuestas/editar" element={<EditarPropuesta />} />
+          <Route path="/iniciativas/mis-propuestas/ver/:id" element={<VerConversacion />} />
+          <Route path="/moderacion" element={<Moderacion />} />
+          <Route path="/moderacion/:id" element={<ModeracionConversacion />} />
           <Route path="/comunidad" element={<Comunidad />} />
           <Route path="/musica" element={<Musica />} />
           <Route path="/historia" element={<Historia />} />

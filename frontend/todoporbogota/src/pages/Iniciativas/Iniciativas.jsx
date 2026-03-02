@@ -1,37 +1,65 @@
 /**
  * Iniciativas Ciudadanas Page
  * 
- * Displays community initiatives with filter capabilities.
- * Features a "Project of the Month" highlighted section
- * and a card grid for all initiatives.
- * Filterable by category and Bogotá locality.
+ * Muestra solo las iniciativas postuladas por los usuarios (localStorage).
+ * Filtros por categoría y barrio. Sin datos quemados de ejemplo.
  */
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useEffect } from 'react'
+import { Link } from 'react-router-dom'
 import SectionHeader from '../../components/SectionHeader/SectionHeader'
 import FilterBar from '../../components/FilterBar/FilterBar'
 import Card from '../../components/Card/Card'
-import iniciativas from '../../data/iniciativas.json'
+import { getMisPropuestasStorage } from '../../utils/storageMisPropuestas'
+import { ESTADOS_PROPUESTA_LABELS } from '../../data/estadosPropuesta'
+import { getViewAsVisitor, VIEW_AS_VISITOR_EVENT } from '../../utils/adminMode'
 import './Iniciativas.css'
 
-// Extract unique categories and localities for filter options
-const categories = [...new Set(iniciativas.map((i) => i.category))]
-const localities = [...new Set(iniciativas.map((i) => i.locality))]
+// Normaliza una propuesta al formato de la lista. Si viewAsVisitor, ninguna es "tuya".
+function toIniciativaItem(p, viewAsVisitor) {
+    const estado = p.estado === 'pendiente' ? 'PENDIENTE' : (p.estado || 'PENDIENTE')
+    return {
+        id: p.id,
+        title: p.titulo,
+        description: p.descripcion,
+        category: p.categoria,
+        locality: p.barrio || '—',
+        status: ESTADOS_PROPUESTA_LABELS[estado] || estado,
+        image: p.imagen || null,
+        isUserProposal: !viewAsVisitor,
+    }
+}
 
 export default function Iniciativas() {
     const [categoryFilter, setCategoryFilter] = useState('Todos')
     const [localityFilter, setLocalityFilter] = useState('Todos')
+    const [userProposals, setUserProposals] = useState([])
+    const [viewAsVisitor, setViewAsVisitor] = useState(() => getViewAsVisitor())
 
-    // Memoize filtered results for performance
+    useEffect(() => {
+        const sync = () => setViewAsVisitor(getViewAsVisitor())
+        sync()
+        window.addEventListener(VIEW_AS_VISITOR_EVENT, sync)
+        return () => window.removeEventListener(VIEW_AS_VISITOR_EVENT, sync)
+    }, [])
+
+    useEffect(() => {
+        setUserProposals(getMisPropuestasStorage().map((p) => toIniciativaItem(p, viewAsVisitor)))
+    }, [viewAsVisitor])
+
+    // Solo iniciativas postuladas por usuarios (sin datos de ejemplo)
+    const allItems = useMemo(() => [...userProposals], [userProposals])
+
+    // Categorías y localidades para filtros (incluyen las de las propuestas del usuario)
+    const categories = useMemo(() => [...new Set(allItems.map((i) => i.category))].sort(), [allItems])
+    const localities = useMemo(() => [...new Set(allItems.map((i) => i.locality))].sort(), [allItems])
+
     const filtered = useMemo(() => {
-        return iniciativas.filter((item) => {
+        return allItems.filter((item) => {
             const matchCategory = categoryFilter === 'Todos' || item.category === categoryFilter
             const matchLocality = localityFilter === 'Todos' || item.locality === localityFilter
             return matchCategory && matchLocality
         })
-    }, [categoryFilter, localityFilter])
-
-    // Project of the month — first featured initiative
-    const projectOfMonth = iniciativas.find((i) => i.featured)
+    }, [allItems, categoryFilter, localityFilter])
 
     return (
         <div className="iniciativas">
@@ -40,24 +68,17 @@ export default function Iniciativas() {
                 subtitle="Proyectos comunitarios que generan impacto social, cultural y ambiental positivo en Bogotá."
             />
 
-            {/* Project of the Month highlight */}
-            {projectOfMonth && (
-                <section className="iniciativas__featured">
-                    <span className="iniciativas__featured-label">🏆 Proyecto del Mes</span>
-                    <div className="iniciativas__featured-card">
-                        <Card
-                            image={projectOfMonth.image}
-                            title={projectOfMonth.title}
-                            description={projectOfMonth.description}
-                            meta={projectOfMonth.category}
-                            tags={[projectOfMonth.locality, `${projectOfMonth.participants} participantes`]}
-                            className="card--featured"
-                        />
-                    </div>
-                </section>
-            )}
+            <div className="iniciativas__ctas">
+                <Link to="/iniciativas/postular" className="btn btn--primary">
+                    Postular iniciativa
+                </Link>
+                <Link to="/iniciativas/mis-propuestas" className="btn btn--outline">
+                    Mis propuestas
+                </Link>
+            </div>
 
-            {/* Filters */}
+            {/* Filtros: solo si hay iniciativas */}
+            {allItems.length > 0 && (
             <div className="iniciativas__filters">
                 <FilterBar
                     filters={categories}
@@ -69,11 +90,12 @@ export default function Iniciativas() {
                     filters={localities}
                     activeFilter={localityFilter}
                     onFilterChange={setLocalityFilter}
-                    label="Localidad"
+                    label="Barrio"
                 />
             </div>
+            )}
 
-            {/* Initiative cards grid */}
+            {/* Grid de iniciativas postuladas */}
             <div className="iniciativas__grid">
                 {filtered.map((item) => (
                     <Card
@@ -83,12 +105,30 @@ export default function Iniciativas() {
                         description={item.description}
                         meta={item.category}
                         tags={[item.locality, item.status]}
-                    />
+                        className={item.isUserProposal ? 'card--user-proposal' : ''}
+                    >
+                        {item.isUserProposal && (
+                            <span className="iniciativas__badge-user">Tu propuesta</span>
+                        )}
+                    </Card>
                 ))}
             </div>
 
             {filtered.length === 0 && (
-                <p className="iniciativas__empty">No se encontraron iniciativas con esos filtros.</p>
+                <div className="iniciativas__empty">
+                    {allItems.length === 0
+                        ? (
+                            <>
+                                <p>Aún no hay iniciativas postuladas.</p>
+                                <p className="iniciativas__empty-hint">Sé el primero en proponer una iniciativa para mejorar tu barrio.</p>
+                                <Link to="/iniciativas/postular" className="btn btn--primary iniciativas__empty-cta">
+                                    Postular iniciativa
+                                </Link>
+                            </>
+                        )
+                        : <p>No se encontraron iniciativas con esos filtros.</p>
+                    }
+                </div>
             )}
         </div>
     )
