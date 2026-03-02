@@ -25,6 +25,7 @@ import EditarPropuesta from './pages/EditarPropuesta/EditarPropuesta'
 import Moderacion from './pages/Moderacion/Moderacion'
 import ModeracionConversacion from './pages/ModeracionConversacion/ModeracionConversacion'
 import VerConversacion from './pages/VerConversacion/VerConversacion'
+import Perfil from './pages/Perfil/Perfil'
 
 export default function App() {
   return (
@@ -48,6 +49,7 @@ export default function App() {
           <Route path="/sostenible" element={<Sostenible />} />
           <Route path="/opina" element={<Opina />} />
           <Route path="/visual" element={<Visual />} />
+          <Route path="/perfil" element={<Perfil />} />
         </Route>
       </Routes>
     </BrowserRouter>
