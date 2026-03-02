@@ -1,0 +1,13 @@
+{
+  "name": "todoporbogota-monorepo",
+  "private": true,
+  "scripts": {
+    "install:all": "npm install --prefix backend/todoporbogota && npm install --prefix frontend/todoporbogota",
+    "dev": "concurrently \"npm run dev --prefix backend/todoporbogota\" \"npm run dev --prefix frontend/todoporbogota\"",
+    "dev:backend": "npm run dev --prefix backend/todoporbogota",
+    "dev:frontend": "npm run dev --prefix frontend/todoporbogota"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.2"
+  }
+}

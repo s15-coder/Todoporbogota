@@ -1,0 +1,181 @@
+/* Postular Iniciativa — Formulario */
+
+.postular-iniciativa {
+  max-width: 560px;
+  margin: 0 auto 3rem;
+}
+
+.postular-iniciativa__success {
+  background: rgba(76, 175, 80, 0.15);
+  color: var(--color-success);
+  padding: 1rem 1.25rem;
+  border-radius: var(--radius-md);
+  margin-bottom: 1.5rem;
+  font-weight: 600;
+  text-align: center;
+}
+
+.postular-iniciativa__limit {
+  text-align: center;
+  padding: 2rem 1rem;
+  background: var(--color-surface);
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.postular-iniciativa__limit-text {
+  color: var(--color-text-muted);
+  margin-bottom: 1.5rem;
+  max-width: 420px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.6;
+}
+
+.postular-iniciativa__limit .btn {
+  margin: 0 0.5rem 0.5rem 0;
+}
+
+/* Form */
+.form-iniciativa {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.form-iniciativa__error-global {
+  background: rgba(244, 67, 54, 0.12);
+  color: var(--color-error);
+  padding: 0.75rem 1rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.9rem;
+}
+
+.form-iniciativa__field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.form-iniciativa__label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.form-iniciativa__required {
+  color: var(--color-error);
+}
+
+.form-iniciativa__optional {
+  font-weight: 400;
+  color: var(--color-text-muted);
+  font-size: 0.85rem;
+}
+
+.form-iniciativa__input {
+  width: 100%;
+  padding: 0.7rem 1rem;
+  font-size: 1rem;
+  font-family: var(--font-family);
+  color: var(--color-text);
+  background: var(--color-surface);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-sm);
+  transition: border-color 0.2s ease;
+}
+
+.form-iniciativa__input::placeholder {
+  color: var(--color-text-muted);
+  opacity: 0.7;
+}
+
+.form-iniciativa__input:focus {
+  outline: none;
+  border-color: var(--color-accent);
+}
+
+.form-iniciativa__input--error {
+  border-color: var(--color-error);
+}
+
+.form-iniciativa__textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+.form-iniciativa__select {
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%239e9e9e' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  padding-right: 2.5rem;
+}
+
+.form-iniciativa__hint {
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+  text-align: right;
+}
+
+.form-iniciativa__hint--block {
+  text-align: left;
+  margin-bottom: 0.5rem;
+}
+
+.form-iniciativa__file {
+  width: 100%;
+  font-size: 0.9rem;
+  color: var(--color-text);
+  padding: 0.5rem 0;
+  cursor: pointer;
+}
+
+.form-iniciativa__file::file-selector-button {
+  padding: 0.5rem 1rem;
+  margin-right: 1rem;
+  font-weight: 600;
+  border: 2px solid rgba(255, 255, 255, 0.15);
+  border-radius: var(--radius-sm);
+  background: var(--color-surface);
+  color: var(--color-text);
+  cursor: pointer;
+}
+
+.form-iniciativa__file::file-selector-button:hover {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+}
+
+.form-iniciativa__preview {
+  margin-top: 0.75rem;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  max-width: 280px;
+  aspect-ratio: 16 / 10;
+}
+
+.form-iniciativa__preview-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.form-iniciativa__error {
+  font-size: 0.85rem;
+  color: var(--color-error);
+}
+
+.form-iniciativa__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+}
+
+.form-iniciativa__actions .btn {
+  min-width: 140px;
+}
