@@ -27,15 +27,42 @@ export default function Navbar() {
     const navigate = useNavigate()
     const [menuOpen, setMenuOpen] = useState(false)
     const [authLoading, setAuthLoading] = useState(false)
+    const [authProvider, setAuthProvider] = useState(null)
     const [authError, setAuthError] = useState('')
     const [user, setUser] = useState(null)
     const [authModalOpen, setAuthModalOpen] = useState(false)
     const [profileMenuOpen, setProfileMenuOpen] = useState(false)
     const promptTimeoutRef = useRef(null)
+    const facebookTimeoutRef = useRef(null)
     const profileMenuRef = useRef(null)
 
     const googleClientId = import.meta.env.VITE_GOOGLE_CLIENT_ID
+    const facebookAppId = import.meta.env.VITE_FACEBOOK_APP_ID
     const apiBaseUrl = useMemo(() => import.meta.env.VITE_API_URL || '', [])
+
+    const handleAuthSuccess = (data) => {
+        localStorage.setItem('authToken', data.token)
+        localStorage.setItem('authUser', JSON.stringify(data.user))
+        setUser(data.user)
+        setProfileMenuOpen(false)
+        setAuthModalOpen(false)
+        setAuthError('')
+    }
+
+    const resetAuthState = () => {
+        if (promptTimeoutRef.current) {
+            clearTimeout(promptTimeoutRef.current)
+            promptTimeoutRef.current = null
+        }
+
+        if (facebookTimeoutRef.current) {
+            clearTimeout(facebookTimeoutRef.current)
+            facebookTimeoutRef.current = null
+        }
+
+        setAuthLoading(false)
+        setAuthProvider(null)
+    }
 
     useEffect(() => {
         const savedToken = localStorage.getItem('authToken')
@@ -92,6 +119,7 @@ export default function Navbar() {
             if (!response?.credential) {
                 setAuthError('No se recibió token de Google')
                 setAuthLoading(false)
+                setAuthProvider(null)
                 return
             }
 
@@ -109,16 +137,12 @@ export default function Navbar() {
                 }
 
                 const data = await loginResponse.json()
-                localStorage.setItem('authToken', data.token)
-                localStorage.setItem('authUser', JSON.stringify(data.user))
-                setUser(data.user)
-                setProfileMenuOpen(false)
-                setAuthModalOpen(false)
-                setAuthError('')
+                handleAuthSuccess(data)
             } catch {
                 setAuthError('Error al iniciar sesión con Google')
             } finally {
                 setAuthLoading(false)
+                setAuthProvider(null)
             }
         }
 
@@ -155,13 +179,55 @@ export default function Navbar() {
         document.head.appendChild(script)
 
         return () => {
-            if (promptTimeoutRef.current) {
-                clearTimeout(promptTimeoutRef.current)
-                promptTimeoutRef.current = null
-            }
+            resetAuthState()
             script.removeEventListener('load', initializeGoogle)
         }
     }, [apiBaseUrl, googleClientId])
+
+    useEffect(() => {
+        if (!facebookAppId) {
+            return
+        }
+
+        const initializeFacebook = () => {
+            if (!window.FB) {
+                return
+            }
+
+            window.FB.init({
+                appId: facebookAppId,
+                cookie: true,
+                xfbml: false,
+                version: 'v22.0',
+            })
+        }
+
+        if (window.FB) {
+            initializeFacebook()
+            return
+        }
+
+        window.fbAsyncInit = initializeFacebook
+
+        const existingScript = document.querySelector('script[data-facebook-sdk="true"]')
+        if (existingScript) {
+            existingScript.addEventListener('load', initializeFacebook)
+            return () => existingScript.removeEventListener('load', initializeFacebook)
+        }
+
+        const script = document.createElement('script')
+        script.src = 'https://connect.facebook.net/en_US/sdk.js'
+        script.async = true
+        script.defer = true
+        script.crossOrigin = 'anonymous'
+        script.dataset.facebookSdk = 'true'
+        script.addEventListener('load', initializeFacebook)
+        document.head.appendChild(script)
+
+        return () => {
+            script.removeEventListener('load', initializeFacebook)
+        }
+    }, [facebookAppId])
 
     const handleGoogleLogin = () => {
         if (!googleClientId) {
@@ -175,6 +241,7 @@ export default function Navbar() {
         }
 
         setAuthLoading(true)
+        setAuthProvider('google')
         setAuthError('')
 
         if (promptTimeoutRef.current) {
@@ -183,6 +250,7 @@ export default function Navbar() {
 
         promptTimeoutRef.current = setTimeout(() => {
             setAuthLoading(false)
+            setAuthProvider(null)
             setAuthError('No se pudo completar autenticación con Google')
             promptTimeoutRef.current = null
         }, 10000)
@@ -192,18 +260,21 @@ export default function Navbar() {
 
             if (notification?.isNotDisplayed?.()) {
                 setAuthLoading(false)
+                setAuthProvider(null)
                 setAuthError('Google no mostró el selector de cuenta')
                 isTerminalMoment = true
             }
 
             if (notification?.isSkippedMoment?.()) {
                 setAuthLoading(false)
+                setAuthProvider(null)
                 setAuthError('No se completó el inicio de sesión con Google')
                 isTerminalMoment = true
             }
 
             if (notification?.isDismissedMoment?.()) {
                 setAuthLoading(false)
+                setAuthProvider(null)
                 isTerminalMoment = true
             }
 
@@ -214,16 +285,100 @@ export default function Navbar() {
         })
     }
 
+    const handleFacebookLogin = () => {
+        if (!facebookAppId) {
+            setAuthError('Falta configurar VITE_FACEBOOK_APP_ID')
+            return
+        }
+
+        if (!window.isSecureContext || window.location.protocol !== 'https:') {
+            setAuthError('Facebook Login requiere HTTPS. Abre la app en https://localhost.')
+            return
+        }
+
+        if (!window.FB) {
+            setAuthError('Facebook no está disponible, recarga la página')
+            return
+        }
+
+        setAuthLoading(true)
+        setAuthProvider('facebook')
+        setAuthError('')
+
+        if (facebookTimeoutRef.current) {
+            clearTimeout(facebookTimeoutRef.current)
+        }
+
+        facebookTimeoutRef.current = setTimeout(() => {
+            setAuthLoading(false)
+            setAuthProvider(null)
+            setAuthError('Facebook tardó demasiado en responder. Intenta nuevamente.')
+            facebookTimeoutRef.current = null
+        }, 12000)
+
+        try {
+            window.FB.login(
+                (response) => {
+                    if (facebookTimeoutRef.current) {
+                        clearTimeout(facebookTimeoutRef.current)
+                        facebookTimeoutRef.current = null
+                    }
+
+                    const accessToken = response?.authResponse?.accessToken
+
+                    if (!accessToken) {
+                        setAuthLoading(false)
+                        setAuthProvider(null)
+                        setAuthError('No se completó el inicio de sesión con Facebook')
+                        return
+                    }
+
+                    void (async () => {
+                        try {
+                            const loginResponse = await fetch(`${apiBaseUrl}/api/users/facebook-login`, {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json',
+                                },
+                                body: JSON.stringify({ accessToken }),
+                            })
+
+                            if (!loginResponse.ok) {
+                                const errorData = await loginResponse.json().catch(() => ({}))
+                                throw new Error(errorData?.error || 'No fue posible iniciar sesión con Facebook')
+                            }
+
+                            const data = await loginResponse.json()
+                            handleAuthSuccess(data)
+                        } catch (error) {
+                            setAuthError(error?.message || 'Error al iniciar sesión con Facebook')
+                        } finally {
+                            setAuthLoading(false)
+                            setAuthProvider(null)
+                        }
+                    })()
+                },
+                { scope: 'public_profile,email' }
+            )
+        } catch (error) {
+            if (facebookTimeoutRef.current) {
+                clearTimeout(facebookTimeoutRef.current)
+                facebookTimeoutRef.current = null
+            }
+
+            setAuthLoading(false)
+            setAuthProvider(null)
+            setAuthError(error?.message || 'Facebook Login falló al abrir el popup')
+        }
+    }
+
     const handleOpenAuthModal = () => {
         setAuthError('')
         setAuthModalOpen(true)
     }
 
     const handleCloseAuthModal = () => {
-        if (authLoading) {
-            return
-        }
-
+        resetAuthState()
         setAuthModalOpen(false)
     }
 
@@ -379,16 +534,16 @@ export default function Navbar() {
                                     <path d="M12 6.1c1.4 0 2.6.5 3.6 1.4l2.7-2.7A10 10 0 0 0 3.3 7.5l3.3 2.6c.7-2.3 2.9-4 5.4-4Z" />
                                 </svg>
                             </span>
-                            <span>{authLoading ? 'Conectando...' : 'Continuar con Google'}</span>
+                            <span>{authLoading && authProvider === 'google' ? 'Conectando...' : 'Continuar con Google'}</span>
                         </button>
 
-                        <button className="navbar__auth-provider navbar__auth-provider--disabled" disabled>
+                        <button className="navbar__auth-provider" onClick={handleFacebookLogin} disabled={authLoading}>
                             <span className="navbar__auth-provider-icon" aria-hidden="true">
                                 <svg viewBox="0 0 24 24" role="img" aria-label="Facebook">
                                     <path d="M14 8h3V4h-3c-3.1 0-5 1.9-5 5v3H6v4h3v4h4v-4h3l1-4h-4V9c0-.6.4-1 1-1Z" />
                                 </svg>
                             </span>
-                            <span>Continuar con Facebook (próximamente)</span>
+                            <span>{authLoading && authProvider === 'facebook' ? 'Conectando...' : 'Continuar con Facebook'}</span>
                         </button>
                     </div>
                 </div>

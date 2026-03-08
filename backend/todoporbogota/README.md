@@ -1,13 +1,14 @@
 # Todo por Bogotá Backend API
 
 Backend principal de autenticación y datos para la app Todo por Bogotá.
-Stack: Express + TypeScript + MongoDB (Mongoose) + Google OAuth + JWT.
+Stack: Express + TypeScript + MongoDB (Mongoose) + Google/Facebook OAuth + JWT.
 
 ## Requisitos
 
 - Node.js 18+
 - MongoDB (Atlas o local)
 - OAuth Client ID de Google (Web)
+- App ID/App Secret de Facebook (Meta Developers)
 
 ## Variables de entorno
 
@@ -17,6 +18,8 @@ Crea `backend/todoporbogota/.env` con:
 PORT=5000
 MONGO_URI=mongodb+srv://USUARIO:PASSWORD@cluster.mongodb.net/todoporbogota
 GOOGLE_CLIENT_ID=tu_cliente_id_de_google.apps.googleusercontent.com
+FACEBOOK_APP_ID=tu_facebook_app_id
+FACEBOOK_APP_SECRET=tu_facebook_app_secret
 JWT_SECRET=una_clave_larga_y_segura
 ```
 
@@ -84,6 +87,18 @@ Respuesta 200:
     "createdAt": "...",
     "updatedAt": "..."
   }
+}
+```
+
+### `POST /api/users/facebook-login`
+
+Valida `accessToken` de Facebook contra Graph API, registra/integra usuario y devuelve JWT + usuario.
+
+Body:
+
+```json
+{
+  "accessToken": "token_de_facebook"
 }
 ```
 
