@@ -19,19 +19,23 @@ Crea `frontend/todoporbogota/.env` con:
 
 ```env
 VITE_GOOGLE_CLIENT_ID=tu_cliente_id_de_google.apps.googleusercontent.com
+VITE_FACEBOOK_APP_ID=tu_facebook_app_id
 VITE_API_URL=http://localhost:5000
 ```
 
 Notas:
 
 - `VITE_GOOGLE_CLIENT_ID` debe coincidir con el `GOOGLE_CLIENT_ID` del backend.
+- `VITE_FACEBOOK_APP_ID` debe coincidir con el `FACEBOOK_APP_ID` del backend.
 - En Google Cloud Console agrega `http://localhost:5173` como Authorized JavaScript Origin.
+- En Meta Developers agrega `http://localhost:5173` como App Domain / origen permitido para login.
 
 ## Flujo de autenticación actual
 
 - Botón en navbar: **Regístrate o Ingresa**.
-- Abre popup con proveedores (Google activo, Facebook próximamente).
+- Abre popup con proveedores (Google y Facebook activos).
 - Login con Google llama `POST /api/users/google-login`.
+- Login con Facebook llama `POST /api/users/facebook-login`.
 - Sesión persistida en `localStorage` (`authToken`, `authUser`).
 - Avatar en navbar abre menú con:
 	- **Ver mi perfil**
