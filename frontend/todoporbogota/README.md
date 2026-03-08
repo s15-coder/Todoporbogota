@@ -19,7 +19,7 @@ Crea `frontend/todoporbogota/.env` con:
 
 ```env
 VITE_GOOGLE_CLIENT_ID=tu_cliente_id_de_google.apps.googleusercontent.com
-VITE_API_URL=http://localhost:5000
+VITE_API_URL=http://localhost:4000
 ```
 
 Notas:
@@ -34,8 +34,8 @@ Notas:
 - Login con Google llama `POST /api/users/google-login`.
 - Sesión persistida en `localStorage` (`authToken`, `authUser`).
 - Avatar en navbar abre menú con:
-	- **Ver mi perfil**
-	- **Cerrar sesión**
+  - **Ver mi perfil**
+  - **Cerrar sesión**
 
 ## Ruta de perfil
 

@@ -29,7 +29,7 @@ npm install
 npm run dev
 ```
 
-URL API: `http://localhost:5000`
+URL API: `http://localhost:4000`
 
 ## Variables de entorno
 
@@ -37,13 +37,13 @@ URL API: `http://localhost:5000`
 
 ```env
 VITE_GOOGLE_CLIENT_ID=tu_cliente_id_de_google.apps.googleusercontent.com
-VITE_API_URL=http://localhost:5000
+VITE_API_URL=http://localhost:4000
 ```
 
 ### Backend (`backend/todoporbogota/.env`)
 
 ```env
-PORT=5000
+PORT=4000
 MONGO_URI=mongodb+srv://USUARIO:PASSWORD@cluster.mongodb.net/todoporbogota
 GOOGLE_CLIENT_ID=tu_cliente_id_de_google.apps.googleusercontent.com
 JWT_SECRET=una_clave_larga_y_segura
