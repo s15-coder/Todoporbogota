@@ -16,7 +16,7 @@ router.post('/google-login', async (req, res) => {
       idToken,
       audience: process.env.GOOGLE_CLIENT_ID,
     });
-    
+
     const payload = ticket.getPayload();
     if (!payload) return res.status(400).json({ error: 'Token inválido' });
 
@@ -37,6 +37,7 @@ router.post('/google-login', async (req, res) => {
 
     res.json({ user, token });
   } catch (error) {
+    console.error('Error en Google Login:', error);
     res.status(500).json({ error: 'Error en el servidor' });
   }
 });
@@ -49,6 +50,7 @@ router.get('/me', authenticate, async (req: AuthRequest, res) => {
 
     return res.json({ user: req.user });
   } catch (error) {
+    console.error('Error al obtener el perfil:', error);
     return res.status(500).json({ error: 'Error en el servidor' });
   }
 });

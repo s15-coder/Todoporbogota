@@ -32,7 +32,7 @@ Build frontend first, then run backend:
 sh .scripts/build-deploy.sh  # Builds frontend → backend/todoporbogota/view
 cd backend/todoporbogota
 npm install
-npm run dev  # ts-node-dev on port 5000
+npm run dev  # ts-node-dev on port 4000
 ```
 
 ### Deployment (Master Branch Only)
@@ -124,7 +124,7 @@ Backend requires:
 - `MONGO_URI` - MongoDB connection string
 - `GOOGLE_CLIENT_ID` - Google OAuth client ID
 - `JWT_SECRET` - JWT signing secret
-- `PORT` - Server port (default 5000)
+- `PORT` - Server port (default 4000)
 
 ## Key Files Reference
 

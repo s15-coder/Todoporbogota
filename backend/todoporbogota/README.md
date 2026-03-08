@@ -14,7 +14,7 @@ Stack: Express + TypeScript + MongoDB (Mongoose) + Google OAuth + JWT.
 Crea `backend/todoporbogota/.env` con:
 
 ```env
-PORT=5000
+PORT=4000
 MONGO_URI=mongodb+srv://USUARIO:PASSWORD@cluster.mongodb.net/todoporbogota
 GOOGLE_CLIENT_ID=tu_cliente_id_de_google.apps.googleusercontent.com
 JWT_SECRET=una_clave_larga_y_segura
@@ -28,7 +28,7 @@ npm install
 npm run dev
 ```
 
-Servidor por defecto: `http://localhost:5000`
+Servidor por defecto: `http://localhost:4000`
 
 ## Endpoints de autenticación
 
@@ -96,4 +96,4 @@ Respuesta 200:
 ## Notas
 
 - Este backend también sirve el frontend compilado desde `backend/todoporbogota/view` en flujo de deploy.
-- Si usas frontend en dev (`localhost:5173`), configura `VITE_API_URL=http://localhost:5000` en el frontend.
+- Si usas frontend en dev (`localhost:5173`), configura `VITE_API_URL=http://localhost:4000` en el frontend.
