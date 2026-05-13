@@ -1,0 +1,98 @@
+/* Moderación — listado de propuestas */
+
+.moderacion__empty {
+  text-align: center;
+  color: var(--color-text-muted);
+  padding: 3rem 1rem;
+}
+
+.moderacion__list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.moderacion__item {
+  margin: 0;
+}
+
+.moderacion__card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.25rem;
+  background: var(--color-surface);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: var(--radius-md);
+  text-decoration: none;
+  color: inherit;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.moderacion__card:hover {
+  border-color: var(--color-accent);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+}
+
+.moderacion__card-main {
+  flex: 1;
+  min-width: 0;
+}
+
+.moderacion__card-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--color-text);
+  margin-bottom: 0.25rem;
+}
+
+.moderacion__card-meta {
+  font-size: 0.85rem;
+  color: var(--color-accent);
+  margin-bottom: 0.35rem;
+}
+
+.moderacion__card-desc {
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+  line-height: 1.45;
+}
+
+.moderacion__estado {
+  flex-shrink: 0;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 0.35rem 0.7rem;
+  border-radius: 999px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.moderacion__estado--pendiente {
+  background: rgba(255, 193, 7, 0.2);
+  color: var(--color-accent);
+}
+
+.moderacion__estado--aprobado {
+  background: rgba(76, 175, 80, 0.25);
+  color: var(--color-success);
+}
+
+.moderacion__estado--rechazado {
+  background: rgba(244, 67, 54, 0.2);
+  color: var(--color-error);
+}
+
+.moderacion__estado--propuesta-de-cambio {
+  background: rgba(0, 188, 212, 0.2);
+  color: var(--color-secondary);
+}
+
+@media (max-width: 640px) {
+  .moderacion__card {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

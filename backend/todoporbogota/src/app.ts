@@ -1,7 +1,9 @@
 import express from "express";
 import cors from "cors";
 import path from "path";
+import mongoose from "mongoose";
 import userRoutes from "./routes/userRoutes";
+import iniciativaRoutes from "./routes/iniciativaRoutes";
 
 const app = express();
 
@@ -10,8 +12,15 @@ app.use(express.json());
 
 // API routes
 app.use("/api/users", userRoutes);
+app.use("/api/iniciativas", iniciativaRoutes);
 app.get("/api", (_req, res) => {
-    res.send("API Running...");
+    res.json({ ok: true, message: "API Running..." });
+});
+app.get("/api/health", (_req, res) => {
+    res.json({
+        ok: true,
+        mongo: mongoose.connection.readyState === 1,
+    });
 });
 
 // Serve static files from view folder (built frontend)

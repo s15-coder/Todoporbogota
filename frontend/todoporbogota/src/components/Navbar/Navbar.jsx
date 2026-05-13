@@ -4,15 +4,16 @@
  * Main navigation bar for todoporbogota.
  * Features a responsive hamburger menu for mobile devices
  * and horizontal navigation links for desktop.
- * Uses React Router's NavLink for active state styling.
  */
-import { useEffect, useMemo, useRef, useState } from 'react'
+import { useState, useEffect, useMemo, useRef } from 'react'
 import { NavLink, useNavigate } from 'react-router-dom'
+import { getAdminMode, ADMIN_MODE_KEY, ADMIN_MODE_EVENT, getViewAsVisitor, VIEW_AS_VISITOR_KEY, VIEW_AS_VISITOR_EVENT } from '../../utils/adminMode'
 import './Navbar.css'
 
 const navLinks = [
     { to: '/', label: 'Inicio' },
     { to: '/iniciativas', label: 'Iniciativas' },
+    { to: '/moderacion', label: 'Moderación', adminOnly: true },
     { to: '/comunidad', label: 'Comunidad' },
     { to: '/musica', label: 'Música' },
     { to: '/historia', label: 'Historia' },
@@ -26,13 +27,40 @@ const navLinks = [
 export default function Navbar() {
     const navigate = useNavigate()
     const [menuOpen, setMenuOpen] = useState(false)
+    const [adminMode, setAdminMode] = useState(false)
+    const [viewAsVisitor, setViewAsVisitor] = useState(false)
+
+    useEffect(() => {
+        setAdminMode(getAdminMode())
+        setViewAsVisitor(getViewAsVisitor())
+    }, [])
+
+    const toggleAdminMode = () => {
+        const next = !adminMode
+        try {
+            localStorage.setItem(ADMIN_MODE_KEY, String(next))
+            window.dispatchEvent(new CustomEvent(ADMIN_MODE_EVENT, { detail: next }))
+        } catch {}
+        setAdminMode(next)
+    }
+
+    const toggleViewAsVisitor = () => {
+        const next = !viewAsVisitor
+        try {
+            localStorage.setItem(VIEW_AS_VISITOR_KEY, String(next))
+            window.dispatchEvent(new CustomEvent(VIEW_AS_VISITOR_EVENT, { detail: next }))
+        } catch {}
+        setViewAsVisitor(next)
+    }
     const [authLoading, setAuthLoading] = useState(false)
     const [authError, setAuthError] = useState('')
     const [user, setUser] = useState(null)
     const [authModalOpen, setAuthModalOpen] = useState(false)
     const [profileMenuOpen, setProfileMenuOpen] = useState(false)
+    const [toolsMenuOpen, setToolsMenuOpen] = useState(false)
     const promptTimeoutRef = useRef(null)
     const profileMenuRef = useRef(null)
+    const toolsMenuRef = useRef(null)
 
     const googleClientId = import.meta.env.VITE_GOOGLE_CLIENT_ID
     const apiBaseUrl = useMemo(() => import.meta.env.VITE_API_URL || '', [])
@@ -246,7 +274,7 @@ export default function Navbar() {
     }
 
     useEffect(() => {
-        if (!authModalOpen && !profileMenuOpen) {
+        if (!authModalOpen && !profileMenuOpen && !toolsMenuOpen) {
             return
         }
 
@@ -254,12 +282,16 @@ export default function Navbar() {
             if (event.key === 'Escape') {
                 handleCloseAuthModal()
                 setProfileMenuOpen(false)
+                setToolsMenuOpen(false)
             }
         }
 
         const handleDocumentClick = (event) => {
             if (!profileMenuRef.current?.contains(event.target)) {
                 setProfileMenuOpen(false)
+            }
+            if (!toolsMenuRef.current?.contains(event.target)) {
+                setToolsMenuOpen(false)
             }
         }
 
@@ -270,7 +302,7 @@ export default function Navbar() {
             window.removeEventListener('keydown', handleEscape)
             window.removeEventListener('mousedown', handleDocumentClick)
         }
-    }, [authModalOpen, authLoading, profileMenuOpen])
+    }, [authModalOpen, authLoading, profileMenuOpen, toolsMenuOpen])
 
     return (
         <nav className="navbar">
@@ -291,20 +323,63 @@ export default function Navbar() {
                     <span></span>
                 </button>
 
-                <ul className={`navbar__links ${menuOpen ? 'navbar__links--open' : ''}`}>
-                    {navLinks.map((link) => (
-                        <li key={link.to}>
-                            <NavLink
-                                to={link.to}
-                                className={({ isActive }) => isActive ? 'navbar__link navbar__link--active' : 'navbar__link'}
-                                onClick={() => setMenuOpen(false)}
-                                end={link.to === '/'}
-                            >
-                                {link.label}
-                            </NavLink>
-                        </li>
-                    ))}
-                </ul>
+                <div className="navbar__right">
+                    <ul className={`navbar__links ${menuOpen ? 'navbar__links--open' : ''}`}>
+                        {navLinks
+                            .filter((link) => !link.adminOnly || adminMode)
+                            .map((link) => (
+                            <li key={link.to}>
+                                <NavLink
+                                    to={link.to}
+                                    className={({ isActive }) => isActive ? 'navbar__link navbar__link--active' : 'navbar__link'}
+                                    onClick={() => setMenuOpen(false)}
+                                    end={link.to === '/'}
+                                >
+                                    {link.label}
+                                </NavLink>
+                            </li>
+                        ))}
+                    </ul>
+                    <div className="navbar__tools-menu" ref={toolsMenuRef}>
+                        <button
+                            type="button"
+                            className={`navbar__tools-trigger ${toolsMenuOpen ? 'navbar__tools-trigger--open' : ''}`}
+                            onClick={() => setToolsMenuOpen((prev) => !prev)}
+                            aria-expanded={toolsMenuOpen}
+                            aria-haspopup="true"
+                            title="Opciones de vista y moderación"
+                        >
+                            Opciones
+                            <span className="navbar__tools-chevron" aria-hidden>▼</span>
+                        </button>
+                        {toolsMenuOpen && (
+                            <div className="navbar__tools-dropdown">
+                                <button
+                                    type="button"
+                                    className={`navbar__tools-option ${viewAsVisitor ? 'navbar__tools-option--on' : ''}`}
+                                    onClick={() => {
+                                        toggleViewAsVisitor()
+                                    }}
+                                    title={viewAsVisitor ? 'Ver iniciativas como propias' : 'Ver iniciativas como visitante'}
+                                    aria-pressed={viewAsVisitor}
+                                >
+                                    {viewAsVisitor ? 'Como visitante ✓' : 'Ver como visitante'}
+                                </button>
+                                <button
+                                    type="button"
+                                    className={`navbar__tools-option navbar__tools-option--admin ${adminMode ? 'navbar__tools-option--on' : ''}`}
+                                    onClick={() => {
+                                        toggleAdminMode()
+                                    }}
+                                    title={adminMode ? 'Salir del modo admin' : 'Activar modo admin'}
+                                    aria-pressed={adminMode}
+                                >
+                                    {adminMode ? 'Admin ✓' : 'Modo admin'}
+                                </button>
+                            </div>
+                        )}
+                    </div>
+                </div>
 
                 <div className="navbar__auth">
                     {user ? (

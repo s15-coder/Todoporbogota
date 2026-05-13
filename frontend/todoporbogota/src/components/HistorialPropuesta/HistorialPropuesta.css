@@ -1,0 +1,75 @@
+/* Historial propuesta — estilo chat */
+
+.historial-propuesta {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.historial-propuesta__mensaje {
+  display: flex;
+}
+
+.historial-propuesta__mensaje--usuario {
+  justify-content: flex-start;
+}
+
+.historial-propuesta__mensaje--moderador {
+  justify-content: flex-end;
+}
+
+.historial-propuesta__bubble {
+  max-width: 85%;
+  padding: 1rem 1.25rem;
+  border-radius: var(--radius-md);
+  position: relative;
+}
+
+.historial-propuesta__mensaje--usuario .historial-propuesta__bubble {
+  background: var(--color-surface);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.historial-propuesta__mensaje--moderador .historial-propuesta__bubble {
+  background: rgba(255, 193, 7, 0.12);
+  border: 1px solid rgba(255, 193, 7, 0.25);
+}
+
+.historial-propuesta__autor {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 0.35rem;
+}
+
+.historial-propuesta__mensaje--usuario .historial-propuesta__autor {
+  color: var(--color-text-muted);
+}
+
+.historial-propuesta__mensaje--moderador .historial-propuesta__autor {
+  color: var(--color-accent);
+}
+
+.historial-propuesta__texto {
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: var(--color-text);
+  margin: 0 0 0.5rem 0;
+}
+
+.historial-propuesta__estado {
+  display: inline-block;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--color-secondary);
+  margin-bottom: 0.35rem;
+}
+
+.historial-propuesta__fecha {
+  display: block;
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+}
