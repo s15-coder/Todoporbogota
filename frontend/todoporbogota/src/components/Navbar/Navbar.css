@@ -13,13 +13,15 @@
 }
 
 .navbar__container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 1rem;
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: 0 1.5rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
   height: 60px;
+  box-sizing: border-box;
 }
 
 .navbar__brand {
@@ -106,6 +108,87 @@
   background: #00acc1;
   border-color: #00acc1;
   color: var(--color-bg);
+}
+
+/* Desplegable Opciones (visitante + admin) */
+.navbar__tools-menu {
+  position: relative;
+  flex-shrink: 0;
+}
+
+.navbar__tools-trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.4rem 0.75rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.navbar__tools-trigger:hover {
+  color: var(--color-text);
+  border-color: rgba(255, 255, 255, 0.35);
+}
+
+.navbar__tools-chevron {
+  font-size: 0.6rem;
+  opacity: 0.8;
+  transition: transform 0.2s ease;
+}
+
+.navbar__tools-trigger--open .navbar__tools-chevron {
+  transform: rotate(180deg);
+}
+
+.navbar__tools-dropdown {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 0.5rem);
+  min-width: 180px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-accent);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  z-index: 1200;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+.navbar__tools-option {
+  width: 100%;
+  border: none;
+  background: transparent;
+  color: var(--color-text);
+  text-align: left;
+  padding: 0.6rem 0.75rem;
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.navbar__tools-option:hover {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.navbar__tools-option--on {
+  color: var(--color-accent);
+  background: rgba(255, 193, 7, 0.08);
+}
+
+.navbar__tools-option--admin.navbar__tools-option--on {
+  color: var(--color-secondary);
+  background: rgba(0, 188, 212, 0.12);
+}
+
 .navbar__auth {
   display: flex;
   align-items: center;
@@ -446,5 +529,4 @@
     margin-left: 0.75rem;
     margin-right: 0;
   }
-}
 }

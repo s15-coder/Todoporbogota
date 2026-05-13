@@ -1,8 +1,8 @@
 /**
  * Iniciativas Ciudadanas Page
- * 
- * Muestra solo las iniciativas postuladas por los usuarios (localStorage).
- * Filtros por categoría y barrio. Sin datos quemados de ejemplo.
+ *
+ * Lista desde API (MongoDB) si está configurada; si no, desde localStorage.
+ * Filtros por categoría y barrio.
  */
 import { useState, useMemo, useEffect } from 'react'
 import { Link } from 'react-router-dom'
@@ -12,10 +12,10 @@ import Card from '../../components/Card/Card'
 import { getMisPropuestasStorage } from '../../utils/storageMisPropuestas'
 import { ESTADOS_PROPUESTA_LABELS } from '../../data/estadosPropuesta'
 import { getViewAsVisitor, VIEW_AS_VISITOR_EVENT } from '../../utils/adminMode'
+import { getIniciativas, apiItemToIniciativaItem, hasApi } from '../../api/iniciativas'
 import './Iniciativas.css'
 
-// Normaliza una propuesta al formato de la lista. Si viewAsVisitor, ninguna es "tuya".
-function toIniciativaItem(p, viewAsVisitor) {
+function toIniciativaItemFromStorage(p, viewAsVisitor) {
     const estado = p.estado === 'pendiente' ? 'PENDIENTE' : (p.estado || 'PENDIENTE')
     return {
         id: p.id,
@@ -29,10 +29,22 @@ function toIniciativaItem(p, viewAsVisitor) {
     }
 }
 
+function getCurrentUserId() {
+    try {
+        const u = localStorage.getItem('authUser')
+        if (!u) return null
+        const user = JSON.parse(u)
+        return user?._id || user?.id || null
+    } catch {
+        return null
+    }
+}
+
 export default function Iniciativas() {
     const [categoryFilter, setCategoryFilter] = useState('Todos')
     const [localityFilter, setLocalityFilter] = useState('Todos')
-    const [userProposals, setUserProposals] = useState([])
+    const [items, setItems] = useState([])
+    const [loading, setLoading] = useState(!!hasApi())
     const [viewAsVisitor, setViewAsVisitor] = useState(() => getViewAsVisitor())
 
     useEffect(() => {
@@ -43,11 +55,31 @@ export default function Iniciativas() {
     }, [])
 
     useEffect(() => {
-        setUserProposals(getMisPropuestasStorage().map((p) => toIniciativaItem(p, viewAsVisitor)))
+        if (hasApi()) {
+            setLoading(true)
+            getIniciativas()
+                .then((list) => {
+                    const userId = getCurrentUserId()
+                    const mapped = (list || []).map((item) => {
+                        const row = apiItemToIniciativaItem(item)
+                        if (row && userId && item.submittedBy) {
+                            const subId = typeof item.submittedBy === 'object' ? item.submittedBy?._id : item.submittedBy
+                            row.isUserProposal = !viewAsVisitor && String(subId) === String(userId)
+                        }
+                        return row
+                    })
+                    setItems(mapped.filter(Boolean))
+                })
+                .catch(() => setItems([]))
+                .finally(() => setLoading(false))
+        } else {
+            const fromStorage = getMisPropuestasStorage().map((p) => toIniciativaItemFromStorage(p, viewAsVisitor))
+            setItems(fromStorage)
+            setLoading(false)
+        }
     }, [viewAsVisitor])
 
-    // Solo iniciativas postuladas por usuarios (sin datos de ejemplo)
-    const allItems = useMemo(() => [...userProposals], [userProposals])
+    const allItems = useMemo(() => [...items], [items])
 
     // Categorías y localidades para filtros (incluyen las de las propuestas del usuario)
     const categories = useMemo(() => [...new Set(allItems.map((i) => i.category))].sort(), [allItems])
@@ -67,6 +99,9 @@ export default function Iniciativas() {
                 title="Iniciativas Ciudadanas"
                 subtitle="Proyectos comunitarios que generan impacto social, cultural y ambiental positivo en Bogotá."
             />
+            {loading && (
+                <p className="iniciativas__loading">Cargando iniciativas…</p>
+            )}
 
             <div className="iniciativas__ctas">
                 <Link to="/iniciativas/postular" className="btn btn--primary">
@@ -95,7 +130,8 @@ export default function Iniciativas() {
             </div>
             )}
 
-            {/* Grid de iniciativas postuladas */}
+            {/* Grid de iniciativas */}
+            {!loading && (
             <div className="iniciativas__grid">
                 {filtered.map((item) => (
                     <Card
@@ -104,7 +140,7 @@ export default function Iniciativas() {
                         title={item.title}
                         description={item.description}
                         meta={item.category}
-                        tags={[item.locality, item.status]}
+                        tags={[item.locality, ESTADOS_PROPUESTA_LABELS[item.status] || item.status]}
                         className={item.isUserProposal ? 'card--user-proposal' : ''}
                     >
                         {item.isUserProposal && (
@@ -113,8 +149,9 @@ export default function Iniciativas() {
                     </Card>
                 ))}
             </div>
+            )}
 
-            {filtered.length === 0 && (
+            {!loading && filtered.length === 0 && (
                 <div className="iniciativas__empty">
                     {allItems.length === 0
                         ? (

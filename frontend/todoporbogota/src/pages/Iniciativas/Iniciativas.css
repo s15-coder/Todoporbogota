@@ -72,6 +72,11 @@
   margin-top: 1.25rem;
 }
 
+.iniciativas__loading {
+  color: var(--color-text-muted);
+  margin: 1rem 0;
+}
+
 /* Badge "Tu propuesta" en cards de iniciativas postuladas por el usuario */
 .iniciativas__badge-user {
   display: inline-block;

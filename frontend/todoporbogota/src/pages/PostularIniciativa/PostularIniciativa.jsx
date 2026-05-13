@@ -9,6 +9,7 @@ import SectionHeader from '../../components/SectionHeader/SectionHeader'
 import { CATEGORIAS_INICIATIVA, MAX_PROPUESTAS_POR_USUARIO } from '../../data/categoriasIniciativa'
 import { validarFormularioIniciativa } from '../../utils/validacionIniciativa'
 import { getMisPropuestasStorage } from '../../utils/storageMisPropuestas'
+import { createIniciativa, hasApi, hasAuth } from '../../api/iniciativas'
 import './PostularIniciativa.css'
 
 const INITIAL_FORM = {
@@ -27,6 +28,7 @@ export default function PostularIniciativa() {
   const [touched, setTouched] = useState({})
   const [yaTieneUna, setYaTieneUna] = useState(false)
   const [enviado, setEnviado] = useState(false)
+  const [submitting, setSubmitting] = useState(false)
 
   useEffect(() => {
     const propuestas = getMisPropuestasStorage()
@@ -66,36 +68,60 @@ export default function PostularIniciativa() {
     reader.readAsDataURL(file)
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
     setTouched({ titulo: true, descripcion: true, categoria: true, barrio: true, participantes: true, imagen: true })
     const { errores: nextErrores, valido } = validarFormularioIniciativa(form)
     setErrores(nextErrores)
     if (!valido) return
 
-    const propuestas = getMisPropuestasStorage()
-    if (propuestas.length >= MAX_PROPUESTAS_POR_USUARIO) {
-      setYaTieneUna(true)
-      setErrores((prev) => ({ ...prev, submit: 'Ya tienes una propuesta postulada. Solo se permite una por usuario.' }))
-      return
+    const useApi = hasApi() && hasAuth()
+    if (!useApi) {
+      const propuestas = getMisPropuestasStorage()
+      if (propuestas.length >= MAX_PROPUESTAS_POR_USUARIO) {
+        setYaTieneUna(true)
+        setErrores((prev) => ({ ...prev, submit: 'Ya tienes una propuesta postulada. Solo se permite una por usuario.' }))
+        return
+      }
     }
 
     const categoriaObj = CATEGORIAS_INICIATIVA.find((c) => String(c.id) === String(form.categoria))
-    const fecha = new Date().toISOString()
-    const nueva = {
-      id: `propuesta-${Date.now()}`,
+    const payload = {
       titulo: form.titulo.trim(),
       descripcion: form.descripcion.trim(),
       categoria: categoriaObj ? categoriaObj.value : form.categoria,
       barrio: form.barrio?.trim() || null,
       participantes: form.participantes ? parseInt(form.participantes, 10) : null,
       imagen: form.imagen || null,
+    }
+
+    if (useApi) {
+      setSubmitting(true)
+      try {
+        await createIniciativa(payload)
+        setEnviado(true)
+        setForm(INITIAL_FORM)
+        setErrores({})
+        setTouched({})
+        setTimeout(() => navigate('/iniciativas/mis-propuestas'), 1200)
+      } catch (err) {
+        setErrores((prev) => ({ ...prev, submit: err?.body?.error || 'No se pudo guardar. Inicia sesión e intenta de nuevo.' }))
+      }
+      setSubmitting(false)
+      return
+    }
+
+    const fecha = new Date().toISOString()
+    const nueva = {
+      id: `propuesta-${Date.now()}`,
+      ...payload,
       fecha,
       estado: 'PENDIENTE',
       historial: [
         { autor: 'usuario', fecha, texto: 'Propuesta enviada para revisión.' },
       ],
     }
+    const propuestas = getMisPropuestasStorage()
     const updated = [...propuestas, nueva]
     try {
       localStorage.setItem('todoporbogota_mis_propuestas', JSON.stringify(updated))
@@ -292,8 +318,8 @@ export default function PostularIniciativa() {
         </div>
 
         <div className="form-iniciativa__actions">
-          <button type="submit" className="btn btn--primary" disabled={enviado}>
-            Enviar propuesta
+          <button type="submit" className="btn btn--primary" disabled={enviado || submitting}>
+            {submitting ? 'Enviando…' : 'Enviar propuesta'}
           </button>
           <Link to="/iniciativas" className="btn btn--outline">
             Cancelar

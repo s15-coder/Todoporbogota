@@ -1,7 +1,6 @@
 /**
  * Página: Mis propuestas postuladas.
- * Normal: Ver conversación, Editar, Eliminar.
- * Modo admin: Aprobar, Rechazar, Conversación.
+ * Si hay API y usuario logueado: datos desde MongoDB. Si no: localStorage.
  */
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
@@ -10,19 +9,34 @@ import Card from '../../components/Card/Card'
 import { getMisPropuestasStorage, deletePropuestaStorage, normalizarPropuesta, appendHistorialStorage } from '../../utils/storageMisPropuestas'
 import { getAdminMode, ADMIN_MODE_EVENT } from '../../utils/adminMode'
 import { ESTADOS_PROPUESTA_LABELS, ESTADOS_PROPUESTA } from '../../data/estadosPropuesta'
+import { getMisPropuestasApi, deleteIniciativa, updateIniciativa, hasApi, hasAuth } from '../../api/iniciativas'
 import './MisPropuestas.css'
 
 export default function MisPropuestas() {
   const [propuestas, setPropuestas] = useState([])
   const [loading, setLoading] = useState(true)
   const [adminMode, setAdminMode] = useState(() => getAdminMode())
+  const useApi = hasApi() && hasAuth()
 
-  const refresh = () => setPropuestas(getMisPropuestasStorage().map(normalizarPropuesta))
+  const refresh = async () => {
+    if (useApi) {
+      setLoading(true)
+      try {
+        const list = await getMisPropuestasApi()
+        setPropuestas(list || [])
+      } catch {
+        setPropuestas(getMisPropuestasStorage().map(normalizarPropuesta))
+      }
+      setLoading(false)
+    } else {
+      setPropuestas(getMisPropuestasStorage().map(normalizarPropuesta))
+      setLoading(false)
+    }
+  }
 
   useEffect(() => {
     refresh()
-    setLoading(false)
-  }, [])
+  }, [useApi])
 
   useEffect(() => {
     const sync = () => setAdminMode(getAdminMode())
@@ -30,23 +44,48 @@ export default function MisPropuestas() {
     return () => window.removeEventListener(ADMIN_MODE_EVENT, sync)
   }, [])
 
-  const handleEliminar = (p) => {
+  const handleEliminar = async (p) => {
     if (!window.confirm('¿Eliminar esta propuesta? Esta acción no se puede deshacer.')) return
-    if (deletePropuestaStorage(p.id)) {
+    if (useApi) {
+      try {
+        await deleteIniciativa(p.id)
+        refresh()
+      } catch (e) {
+        window.alert(e?.body?.error || 'No se pudo eliminar.')
+      }
+    } else if (deletePropuestaStorage(p.id)) {
       refresh()
     }
   }
 
-  const handleAprobar = (p) => {
+  const handleAprobar = async (p) => {
     if (!window.confirm('¿Aprobar esta propuesta?')) return
-    const entry = { autor: 'moderador', fecha: new Date().toISOString(), texto: 'Propuesta aprobada.', estado: ESTADOS_PROPUESTA.APROBADO }
-    if (appendHistorialStorage(p.id, entry, ESTADOS_PROPUESTA.APROBADO)) refresh()
+    if (useApi) {
+      try {
+        await updateIniciativa(p.id, { estado: ESTADOS_PROPUESTA.APROBADO })
+        refresh()
+      } catch (e) {
+        window.alert(e?.body?.error || 'No se pudo aprobar.')
+      }
+    } else {
+      const entry = { autor: 'moderador', fecha: new Date().toISOString(), texto: 'Propuesta aprobada.', estado: ESTADOS_PROPUESTA.APROBADO }
+      if (appendHistorialStorage(p.id, entry, ESTADOS_PROPUESTA.APROBADO)) refresh()
+    }
   }
 
-  const handleRechazar = (p) => {
+  const handleRechazar = async (p) => {
     if (!window.confirm('¿Rechazar esta propuesta?')) return
-    const entry = { autor: 'moderador', fecha: new Date().toISOString(), texto: 'Propuesta rechazada.', estado: ESTADOS_PROPUESTA.RECHAZADO }
-    if (appendHistorialStorage(p.id, entry, ESTADOS_PROPUESTA.RECHAZADO)) refresh()
+    if (useApi) {
+      try {
+        await updateIniciativa(p.id, { estado: ESTADOS_PROPUESTA.RECHAZADO })
+        refresh()
+      } catch (e) {
+        window.alert(e?.body?.error || 'No se pudo rechazar.')
+      }
+    } else {
+      const entry = { autor: 'moderador', fecha: new Date().toISOString(), texto: 'Propuesta rechazada.', estado: ESTADOS_PROPUESTA.RECHAZADO }
+      if (appendHistorialStorage(p.id, entry, ESTADOS_PROPUESTA.RECHAZADO)) refresh()
+    }
   }
 
   if (loading) {
